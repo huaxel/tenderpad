@@ -1,0 +1,1642 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tenderpad · Belgian tender search</title>
+  <meta name="description" content="Explore open public tenders matched to your company’s activities, location and experience. Every recommendation explains its reasoning, so you stay in control." data-i18n-content="introCopy">
+  <meta name="theme-color" content="#3c6e71">
+  <link rel="icon" type="image/svg+xml" href="/tenderpad-mark.svg">
+  <style>
+    @font-face { font-family: "Bricolage Grotesque"; src: url("/fonts/BricolageGrotesque-latin.woff2") format("woff2"); font-style: normal; font-weight: 400 800; font-display: swap; }
+    @font-face { font-family: "Bricolage Grotesque"; src: url("/fonts/BricolageGrotesque-latin-ext.woff2") format("woff2"); font-style: normal; font-weight: 400 800; font-display: swap; }
+    @font-face { font-family: "IBM Plex Mono"; src: url("/fonts/IBMPlexMono-latin-400.woff2") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; }
+    @font-face { font-family: "IBM Plex Mono"; src: url("/fonts/IBMPlexMono-latin-ext-400.woff2") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; }
+    @font-face { font-family: "IBM Plex Mono"; src: url("/fonts/IBMPlexMono-latin-500.woff2") format("woff2"); font-style: normal; font-weight: 500; font-display: swap; }
+    @font-face { font-family: "IBM Plex Mono"; src: url("/fonts/IBMPlexMono-latin-ext-500.woff2") format("woff2"); font-style: normal; font-weight: 500; font-display: swap; }
+  </style>
+  <link rel="stylesheet" href="/workspace.css">
+  <script src="/example.js"></script>
+  <script src="/workspace.js"></script>
+  <script src="/workspace-tools.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace-content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" data-real-workspace aria-label="Tenderpad home" data-i18n-aria-label="homeLabel"><img class="brand-mark" src="/tenderpad-mark.svg" width="48" height="40" alt=""><span>Tenderpad</span></a>
+      <nav class="workspace-nav" aria-label="Workspace" data-i18n-aria-label="workspaceNav">
+        <button type="button" data-view="opportunities" aria-current="page" aria-controls="view-opportunities"><span data-i18n="opportunities">Opportunities</span></button>
+        <button type="button" data-view="shortlist" aria-controls="view-shortlist"><span data-i18n="shortlistNav">Shortlist</span><span id="nav-shortlist-count" class="nav-count">0</span></button>
+        <button type="button" data-view="profile" aria-controls="view-profile"><span data-i18n="companyProfile">Company profile</span></button>
+      </nav>
+      <div class="header-actions">
+        <label class="sr-only" for="ui-language" data-i18n="languageLabel">Language</label>
+        <select id="ui-language" class="language-select" aria-label="Language" data-i18n-aria-label="languageLabel">
+          <option value="en">English</option><option value="nl">Nederlands</option><option value="fr">Français</option>
+        </select>
+      </div>
+    </div>
+    <div id="example-banner" class="example-banner" hidden><div><strong data-i18n="exampleWorkspace">Example workspace</strong><p data-i18n="exampleExplanation">Fictional company and notices, with illustrative scores. Explore selection, evidence and your shortlist.</p></div><a href="/" data-real-workspace data-i18n="useOwnCompany">Use my own company →</a></div>
+  </header>
+  <main class="app-shell">
+    <aside class="workspace-sidebar" aria-label="Company and filters" data-i18n-aria-label="companyFilters">
+      <div class="sidebar-company"><p class="eyebrow" data-i18n="companyProfile">Company profile</p><h2 id="sidebar-company-name" data-i18n="chooseCompany">Choose your company</h2><p id="sidebar-company-meta" class="muted" data-i18n="lookupHint">Enter a Belgian enterprise number to find opportunities.</p></div>
+          <section class="search-panel" aria-label="Find opportunities" data-i18n-aria-label="searchTitle">
+      <form id="lookup-form" aria-busy="false">
+        <div class="field"><label for="enterprise-number" data-i18n="enterpriseNumber">Belgian enterprise number</label><input id="enterprise-number" placeholder="e.g. 0404.484.060" autocomplete="organization" required></div>
+        <div class="field"><label for="sort-order" data-i18n="sortBy">Sort by</label><select id="sort-order" aria-label="Sort opportunities" data-i18n-aria-label="sortBy">
+          <option value="score" data-i18n="bestMatch">Best match</option>
+          <option value="deadline" data-i18n="soonestDeadline">Soonest deadline</option>
+        </select></div>
+        <div class="field"><label for="deadline-window" data-i18n="closingDate">Closing date</label><select id="deadline-window" aria-label="Deadline window" data-i18n-aria-label="closingDate">
+          <option value="" data-i18n="anyDeadline">Any deadline</option>
+          <option value="7" data-i18n="within7">Within 7 days</option>
+          <option value="30" data-i18n="within30">Within 30 days</option>
+          <option value="90" data-i18n="within90">Within 90 days</option>
+        </select></div>
+        <button type="submit"><span data-i18n="findOpportunities">Find opportunities</span> <span aria-hidden="true">→</span></button>
+      </form>
+      <div class="token-row"><span class="token-lock" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg></span><label for="api-token" data-i18n="apiToken">API token</label><input id="api-token" type="password" placeholder="Only needed if your server requires one" data-i18n-placeholder="apiTokenPlaceholder" autocomplete="off"></div>
+    </section>
+
+      <div id="health" class="muted" aria-live="polite"></div>
+    </aside>
+    <div id="workspace-content" tabindex="-1">
+      <div id="message" class="muted" role="status" aria-live="polite"></div>
+      <section id="view-opportunities" aria-label="Opportunities" data-i18n-aria-label="opportunities">
+            <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow" data-i18n="eyebrow">Belgian public tender search</p>
+        <h1 id="page-title" data-i18n="pageTitle">Your path to public contracts.</h1>
+        <p class="intro-copy" data-i18n="introCopy">Explore open public tenders matched to your company’s activities, location and experience. Every recommendation explains its reasoning, so you stay in control.</p>
+        <div class="example-entry"><a class="primary-action" href="/?example=1" data-example-workspace data-i18n="tryExample">Try an example company</a><span data-i18n="exampleEntryHelp">Explore fictional opportunities before looking up your own company.</span></div>
+      </div>
+      <aside class="intro-aside"><strong data-i18n="decisionTitle">Decision support, not a verdict</strong><span data-i18n="decisionCopy">Review every opportunity against its official notice.</span></aside>
+    </section>
+
+
+        <div class="mobile-toolbar"><span id="mobile-company-name"></span><button id="open-filters" class="secondary" type="button" data-i18n="filters">Filters</button></div>
+        <details class="keyboard-help"><summary data-i18n="keyboardShortcuts">Keyboard shortcuts</summary><p data-i18n="keyboardHelp">Focus a result: ↑/↓ to browse, Enter to open, S to save or remove. Escape closes the detail panel.</p></details>
+        <h2 id="results-heading" class="hidden" data-i18n="resultsHeading">Recommended opportunities</h2>
+        <p id="results-summary" class="results-summary muted hidden" role="status" aria-live="polite"></p>
+        <div id="tender-workspace">
+          <section id="results" aria-label="Tender recommendations" data-i18n-aria-label="resultsHeading" aria-busy="false"><div class="welcome-state"><span class="eyebrow" data-i18n="evidenceFirst">Evidence in view</span><h2 data-i18n="welcomeTitle">A clearer starting point for your next tender.</h2><p data-i18n="lookupHint">Enter a Belgian enterprise number to find opportunities.</p></div></section>
+          <aside id="selected-panel" class="selected-panel" hidden aria-labelledby="selected-heading" tabindex="-1" data-detail-view="overview">
+            <div class="selected-head"><h2 id="selected-heading" data-i18n="selectedOpportunity">Selected opportunity</h2><button id="close-selected" class="secondary icon-button" type="button" aria-label="Close selected opportunity" data-i18n-aria-label="closeSelection">×</button></div>
+            <div class="detail-tabs" role="tablist" aria-label="Tender details" data-i18n-aria-label="tenderDetails">
+              <button id="tab-overview" type="button" role="tab" data-detail-tab="overview" aria-selected="true" aria-controls="selected-content" data-i18n="overview">Overview</button>
+              <button id="tab-evidence" type="button" role="tab" data-detail-tab="evidence" aria-selected="false" aria-controls="selected-content" tabindex="-1" data-i18n="evidence">Evidence</button>
+            </div>
+            <div id="selected-content" role="tabpanel" aria-labelledby="tab-overview"></div>
+          </aside>
+        </div>
+      </section>
+      <section id="view-shortlist" hidden aria-label="Shortlist" data-i18n-aria-label="shortlistNav">
+        <div class="view-heading"><p class="eyebrow" data-i18n="shortlistNav">Shortlist</p><h1 data-i18n="compareOpportunities">Compare your opportunities</h1></div>
+        <div id="shortlist-empty" class="empty-state panel"><strong data-i18n="shortlistEmpty">Your shortlist is empty</strong><p data-i18n="shortlistEmptyHelp">Save opportunities to compare their evidence, dates and value.</p><button class="secondary" type="button" data-go-view="opportunities" data-i18n="backOpportunities">Back to opportunities</button></div>
+            <section id="shortlist-panel" class="panel shortlist-panel hidden" aria-labelledby="shortlist-heading">
+      <div class="shortlist-head"><div><h3 id="shortlist-heading" data-i18n="shortlistTitle">Shortlist</h3><p class="field-help" data-i18n="shortlistIntro">Saved tender details are a snapshot. Confirm current information in the official notice.</p><p class="field-help shortlist-scroll-hint" data-i18n="shortlistScrollHint">On small screens, scroll sideways to compare all columns.</p></div><div class="shortlist-toolbar"><button id="check-shortlist-changes" type="button" class="secondary" data-i18n="checkSavedNotices" disabled>Check saved notices</button><span id="shortlist-count" class="shortlist-count" aria-label="Shortlist count"></span></div></div>
+      <p class="field-help" data-i18n="retainedCheckScope">Checks compare saved fields with retained records in this store, not a live source refresh. Separately identified notices are not linked here.</p>
+      <p class="field-help" data-i18n="followUpHelp">Plan your next action here. Follow-up dates use Brussels time and are shown in this browser; no notifications are sent.</p>
+      <div id="shortlist-content" class="shortlist-table-wrap" role="region" aria-label="Shortlist comparison" tabindex="-1"></div>
+    </section>
+
+      </section>
+      <section id="view-profile" hidden aria-label="Company profile" data-i18n-aria-label="companyProfile">
+        <div class="view-heading"><p class="eyebrow" data-i18n="companyProfile">Company profile</p><h1 data-i18n="shapeProfile">Shape your matching profile</h1></div>
+        <p id="profile-empty" data-i18n="lookupHint">Enter a Belgian enterprise number to find opportunities.</p>
+        <section id="company" class="hidden" aria-label="Company profile" data-i18n-aria-label="companyProfile"></section>
+          <section id="preferences" class="panel hidden">
+    <h2 data-i18n="matchingProfile">Your matching profile</h2>
+    <p class="muted" data-i18n="matchingProfileCopy">These editable preferences shape recommendations only; they never change your official KBO registration above.</p>
+    <div class="preferences">
+      <label><span data-i18n="activitiesToMatch">Activities to match</span>
+        <span class="field-help" data-i18n="activitiesHelp">Describe the work you want tender recommendations for.</span>
+        <input id="confirmed-activities" placeholder="software consulting, data platforms">
+      </label>
+      <label><span data-i18n="excludeTerms">Exclude terms</span>
+        <input id="excluded-terms" placeholder="night work, healthcare">
+      </label>
+      <label><span data-i18n="preferredRegions">Preferred regions</span>
+        <input id="preferred-regions" placeholder="Brussels, Leuven">
+      </label>
+      <label><span data-i18n="languages">Languages</span>
+        <input id="languages" placeholder="nl, fr, en">
+      </label>
+      <label><span data-i18n="minimumValue">Minimum contract value</span>
+        <input id="minimum-value" type="number" min="0" step="any" placeholder="0">
+      </label>
+      <label><span data-i18n="maximumValue">Maximum contract value</span>
+        <input id="maximum-value" type="number" min="0" step="any" placeholder="No maximum">
+      </label>
+      <label><span data-i18n="recognitionClass">Recognition class (works, 1-8)</span>
+        <input id="recognition-class" type="number" min="1" max="8" step="1" placeholder="Not recognised">
+      </label>
+      <label><span data-i18n="recognitionCategories">Recognition categories</span>
+        <input id="recognition-categories" list="recognition-category-options" placeholder="C, D17">
+        <datalist id="recognition-category-options"></datalist>
+      </label>
+    </div>
+    <p id="recognition-glossary" class="muted" data-i18n="recognitionLoading">Loading recognition category descriptions and class limits…</p>
+    <p class="muted" data-i18n="recognitionHelp">Belgian works recognition (erkenning/agréation) is graded in classes 1-8 and categories. Notices often state which one they require; telling us yours lets us warn when a contract asks for more. It is never treated as a verdict on whether you may bid.</p>
+    <div class="preference-save-bar"><span id="preference-status" role="status" data-i18n="preferencesUnchanged">No unsaved changes</span><div><button id="discard-preferences" class="secondary" type="button" data-i18n="discard">Discard</button><button id="save-preferences" type="button" data-i18n="saveProfile" disabled>Save profile corrections</button></div></div>
+  </section>
+
+      </section>
+    </div>
+  </main>
+  <dialog id="filter-dialog" aria-labelledby="filter-heading"><div class="filter-head"><h2 id="filter-heading" data-i18n="filters">Filters</h2><button id="close-filters" class="secondary icon-button" type="button" aria-label="Close filters" data-i18n-aria-label="closeFilters">×</button></div><div id="filter-dialog-content"></div><button id="reset-filters" class="secondary" type="button" data-i18n="resetFilters">Reset filters</button></dialog>
+  <div id="workspace-toast" class="workspace-toast" hidden><span id="toast-text" role="status"></span><button id="undo-shortlist" class="secondary" type="button" data-i18n="undo" hidden>Undo</button><button id="dismiss-toast" class="icon-button secondary" type="button" aria-label="Dismiss notification" data-i18n-aria-label="dismiss">×</button></div>
+  <footer class="site-footer"><div class="footer-inner"><p data-i18n="footer">Recommendations are a starting point. Always review the official tender documents before deciding to bid.</p><a href="/welcome/" data-product-page data-i18n="aboutTenderpad">About Tenderpad</a></div></footer>
+
+  <script>
+    const uiCopy = {
+      en: {
+        tryExample: 'Try an example company', exampleEntryHelp: 'Explore fictional opportunities before looking up your own company.',
+        exampleWorkspace: 'Example workspace', exampleExplanation: 'Fictional company and notices, with illustrative scores. Explore selection, evidence and your shortlist.',
+        useOwnCompany: 'Use my own company →', exampleCompany: 'Example company', exampleCompanyData: 'Fictional company data', exampleActivities: 'Example activities',
+        exampleSourceHelp: 'The notice text below is fictional and is provided to illustrate evidence review.', exampleNotice: 'Fictional example notice',
+        noMatchReasons: 'No matching reasons were supplied for this opportunity.', remainsUnverified: 'What remains unverified',
+        requirementsNotReviewed: 'Selection requirements and lot scope still need review in the official documents.',
+        unknownDeadline: 'The closing date is not stated in this record.', unknownValue: 'The estimated contract value is not stated in this record.',
+        nextReviewStep: 'Next step', nextReviewCopy: 'Inspect the retained notice, then confirm the deadline, lot scope and selection requirements in the official documents.',
+        inspectNotice: 'Inspect retained notice', inspectExampleNotice: 'Open example notice',
+        exampleProfileTitle: 'Explore the example profile', examplePreferencesCopy: 'These read-only example preferences illustrate the company profile. Use your own company to edit and save preferences.',
+        matchBasis: 'Compare these signals with the company activities and preferences.', viewMatchedProfile: 'View company profile',
+        nextCheckDeadline: 'Confirm the closing date in the official notice before planning any bid preparation.',
+        nextCheckRequirements: 'Review the extracted requirements and their lot scope, then check what company evidence is needed in the official documents.',
+        nextCheckValue: 'Look for the contract value and lot scope in the official documents before assessing capacity.',
+        noExtractedRequirements: 'No requirements were extracted in this record. Check the official documents; requirements may still apply.',
+        requirementPage: 'Page', requirementMandatory: 'Recorded as mandatory', requirementOptional: 'Recorded as optional', requirementStatusUnknown: 'Mandatory status not stated',
+        keyboardShortcuts: "Keyboard shortcuts",
+        keyboardHelp: "Focus a result: ↑/↓ to browse, Enter to open, S to save or remove. Escape closes the detail panel.",
+        checkSavedNotices: "Check saved notices",
+        retainedCheckScope: "Checks compare saved fields with retained records in this store, not a live source refresh. Separately identified notices are not linked here.",
+        changesSinceSaving: "Changes since saving",
+        changesNotChecked: "Not checked",
+        checkingChanges: "Checking…",
+        changesUnavailable: "Record unavailable",
+        noticeChanged: "Recorded changes",
+        noRecordedChanges: "No recorded changes in saved fields",
+        noticeRevision: "Notice revision",
+        retainedDeadlinePassed: "Retained deadline has passed",
+        savedDeadlinePassed: "Saved deadline has passed (not rechecked)",
+        checkedAt: "Checked (Brussels time)",
+        revisionNotCompared: "Revision comparison unavailable: no comparable version was captured at saving and checking.",
+        workspaceNav: "Workspace",
+        opportunities: "Opportunities",
+        shortlistNav: "Shortlist",
+        companyFilters: "Company and filters",
+        chooseCompany: "Choose your company",
+        lookupHint: "Enter a Belgian enterprise number to find opportunities.",
+        evidenceFirst: "Evidence in view",
+        welcomeTitle: "A clearer starting point for your next tender.",
+        selectedOpportunity: "Selected opportunity",
+        closeSelection: "Close selected opportunity",
+        tenderDetails: "Tender details",
+        overview: "Overview",
+        evidence: "Evidence",
+        filters: "Filters",
+        compareOpportunities: "Compare your opportunities",
+        shortlistEmpty: "Your shortlist is empty",
+        shortlistEmptyHelp: "Save opportunities to compare their evidence, dates and value.",
+        backOpportunities: "Back to opportunities",
+        shapeProfile: "Shape your matching profile",
+        preferencesUnchanged: "No unsaved changes",
+        unsavedChanges: "Unsaved changes",
+        discard: "Discard",
+        closeFilters: "Close filters",
+        resetFilters: "Reset filters",
+        undo: "Undo",
+        dismiss: "Dismiss notification",
+        sourceEvidenceHelp: "Evidence below comes from the retained notice. Verify its scope in the official documents.",
+        requirementsUnverified: "Requirements to verify",
+        shortlistUpdated: "Shortlist updated.",
+        yourAssessment: "Your assessment",
+        browserOnly: "Saved in this browser only; not source evidence.",
+        reviewNote: "Your note",
+        aboutTenderpad: 'About Tenderpad',
+        nextAction: 'Next action', followUpDate: 'Follow-up date', followUpHelp: 'Plan your next action here. Follow-up dates use Brussels time and are shown in this browser; no notifications are sent.',
+        followUpOverdue: 'Overdue', followUpToday: 'Due today', followUpUpcoming: 'Upcoming', followUpUnscheduled: 'No follow-up date', followUpDone: 'Done',
+        markActionDone: 'Mark done', reopenAction: 'Reopen action', invalidFollowUpDate: 'Enter a valid follow-up date.',
+        notReviewed: "Not reviewed",
+        worthExploring: "Worth exploring",
+        notPursuing: "Not pursuing",
+        changeUndone: "Change undone.",
+        invalidPreferences: "Check the profile fields and contract value range.",
+        documentTitle: 'Tenderpad · Belgian tender search', homeLabel: 'Tenderpad home', languageLabel: 'Language',
+        eyebrow: 'Belgian public tender search', pageTitle: 'Your path to public contracts.',
+        introCopy: 'Explore open public tenders matched to your company’s activities, location and experience. Every recommendation explains its reasoning, so you stay in control.',
+        decisionTitle: 'Decision support, not a verdict', decisionCopy: 'Review every opportunity against its official notice.',
+        searchTitle: 'Find opportunities', enterpriseNumber: 'Belgian enterprise number', sortBy: 'Sort by', bestMatch: 'Best match',
+        soonestDeadline: 'Soonest deadline', closingDate: 'Closing date', anyDeadline: 'Any deadline', within7: 'Within 7 days',
+        within30: 'Within 30 days', within90: 'Within 90 days', findOpportunities: 'Find opportunities', apiToken: 'API token',
+        apiTokenPlaceholder: 'Only needed if your server requires one', resultsHeading: 'Recommended opportunities',
+        matchingProfile: 'Your matching profile', matchingProfileCopy: 'These editable preferences shape recommendations only; they never change your official KBO registration above.',
+        activitiesToMatch: 'Activities to match', activitiesHelp: 'Describe the work you want tender recommendations for.',
+        excludeTerms: 'Exclude terms', preferredRegions: 'Preferred regions', languages: 'Languages', minimumValue: 'Minimum contract value',
+        maximumValue: 'Maximum contract value', recognitionClass: 'Recognition class (works, 1–8)', recognitionCategories: 'Recognition categories',
+        recognitionLoading: 'Loading recognition category descriptions and class limits…',
+        recognitionHelp: 'Belgian works recognition (erkenning/agréation) is graded in classes 1–8 and categories. Notices often state which one they require; telling us yours lets us warn when a contract asks for more. It is never treated as a verdict on whether you may bid.',
+        saveProfile: 'Save profile corrections', footer: 'Recommendations are a starting point. Always review the official tender documents before deciding to bid.',
+        registeredActivities: 'Registered activities', officialKbo: 'Official KBO data', status: 'Status', noneFound: 'None found',
+        fitScore: 'Fit score', evidenceSignal: 'Evidence signal', scoreGuideTitle: 'How scores work', scorePairLabel: 'Fit and evidence scores',
+        scoreGuideCopy: 'Fit score ranks how closely a notice matches the company profile. Evidence signal reflects positive support across five areas: sector, location, previous awards, recognition, and contract value. Neither is a probability of winning or an eligibility decision.',
+        buyer: 'Buyer', closingLabel: 'Closing date', estimatedValue: 'Estimated value', location: 'Location', cpv: 'CPV', language: 'Language',
+        moreTenderDetails: 'Location, CPV and language', whyMayFit: 'Why it may fit', otherSignals: 'Other match signals',
+        sourceRecord: 'Source record', reviewOfficialNotice: 'Review official notice', moreActions: 'More actions', tender: 'Tender',
+        matchFeedback: 'Match feedback', viewDetails: 'View details', structuredAnalysis: 'Structured analysis', relevant: 'Relevant',
+        notRelevant: 'Not relevant', checkManually: 'Check manually', requirementSignals: 'Requirement signals',
+        showRequirements: 'Show extracted requirements', loadingCompany: 'Loading company and opportunities…',
+        noResults: 'No open tenders matched this company and these filters.',
+        noResultsHelp: 'Try a longer closing-date window or adjust your company profile, then search again.',
+        unknownBuyer: 'Unknown buyer', notStated: 'Not stated', companyProfile: 'Company profile', dataDetails: 'Data details',
+        openProcurement: 'open procurement', openProcurements: 'open procurements', unknownOpen: 'open procurements unknown', unknownTenderCount: 'tender count unknown',
+        tenderLoaded: 'tender loaded', tendersLoaded: 'tenders loaded', freshData: 'Fresh data', staleData: 'Data is stale',
+        freshnessUnknown: 'Freshness unverified', dataUnavailable: 'Data status could not be loaded. Check the API server connection.',
+        reasonLanguageMatch: 'Tender language matches preferred languages', reasonActivityMatch: 'Tender activity matches registered company activities',
+        reasonRegionMatch: 'Tender location matches a company municipality', reasonValueForReview: 'Contract value is available for capacity review',
+        reasonValueWithinAward: 'Contract value is within the previous award range', reasonPreviousAward: 'CPV category matches a previous awarded contract',
+        apiTokenRequired: 'This server requires an API token: paste it above (or add #token=... to the URL).',
+        htmlResponse: 'The server returned an HTML page instead of API data. Serve the dashboard through the Rust API server.',
+        companyNotFound: 'This enterprise number is not in the configured KBO register. Check the number or the loaded company snapshot.',
+        apiRouteMissing: 'The requested API route was not found. Check that the dashboard and API versions match.',
+        serviceUnavailable: 'The service is temporarily unavailable. Try again shortly.', invalidSubmission: 'Check the submitted information and try again.',
+        requestFailed: 'The request failed', couldNotLoad: 'Could not load', companyResource: 'company', preferencesResource: 'profile corrections',
+        recommendationsResource: 'recommendations', networkUnavailable: 'The API could not be reached. Check that the Rust server is running and try again.',
+        resultsShown: 'Recommendations shown: {count} (max 20 per search)', anyDeadlineSummary: 'any deadline', deadlineWithinSummary: 'deadline within {days} days', shortlistScrollHint: 'Scroll sideways, or focus the comparison and use the arrow keys.', shortlistRegionLabel: 'Shortlist comparison',
+        sortedBestMatchSummary: 'best match', sortedSoonestSummary: 'soonest deadline',
+        shortlistTitle: 'Shortlist', compare: 'Compare', shortlistIntro: 'Saved tender details are a snapshot. Confirm current information in the official notice.',
+        addToShortlist: 'Add to shortlist', inShortlist: 'In shortlist', removeFromShortlist: 'Remove', addedToShortlist: 'Added to shortlist.',
+        removedFromShortlist: 'Removed from shortlist.', shortlistMax: 'Shortlist limit is 5. Remove one to add another.', shortlistNotPersisted: 'Changes kept for this visit only; browser storage is unavailable.',
+        savingRequiresToken: 'Saving requires the API token - enter it in the field above the search bar',
+        saveFailed: 'Could not save profile corrections', saveRefreshFailed: 'Profile corrections saved, but the recommendations could not be refreshed.',
+        saveSucceeded: 'Profile corrections saved and recommendations refreshed.',
+        cardLoading: 'Loading…', detailsLoaded: 'Details loaded', detailsUnavailable: 'Tender details unavailable', retryDetails: 'Retry details',
+        description: 'Description', requirements: 'Requirements', notAvailable: 'Not available', analyzing: 'Analyzing…',
+        analysisUnavailable: 'Structured analysis unavailable', retryAnalysis: 'Retry analysis', analyzed: 'Analyzed',
+        activity: 'Activity', geography: 'Geography', previousWork: 'Previous work', confidence: 'confidence',
+        pursuableQuestion: 'Pursuable?', yes: 'Yes', no: 'No', clear: 'Clear', outcome: 'Outcome', outcomeBid: 'bid', outcomeNoBid: 'no-bid', outcomeWon: 'won', outcomeLost: 'lost',
+        feedbackRelevant: 'relevant', feedbackNotRelevant: 'not relevant', feedbackPursuable: 'pursuable', feedbackNotPursuable: 'not pursuable', feedbackUnset: 'pursuability unset', feedbackOutcome: 'outcome',
+        chooseRelevance: 'Judge Relevant / Not relevant first', savingFeedback: 'Saving…', feedbackSaveFailed: 'Failed to save', retryFeedback: 'Retry save', feedbackTokenRequired: 'API token required', feedbackSaved: 'Saved', feedbackSavedAs: 'Saved as'
+      },
+      nl: {
+        tryExample: 'Probeer een voorbeeldbedrijf', exampleEntryHelp: 'Verken fictieve opdrachten voordat u uw eigen bedrijf opzoekt.',
+        exampleWorkspace: 'Voorbeeldwerkruimte', exampleExplanation: 'Fictief bedrijf en fictieve aankondigingen, met illustratieve scores. Verken de selectie, bronnen en shortlist.',
+        useOwnCompany: 'Mijn eigen bedrijf gebruiken →', exampleCompany: 'Voorbeeldbedrijf', exampleCompanyData: 'Fictieve bedrijfsgegevens', exampleActivities: 'Voorbeeldactiviteiten',
+        exampleSourceHelp: 'De onderstaande aankondiging is fictief en dient als voorbeeld voor de beoordeling van bronnen.', exampleNotice: 'Fictieve voorbeeldaankondiging',
+        noMatchReasons: 'Voor deze opdracht zijn geen matchredenen aangeleverd.', remainsUnverified: 'Wat nog te verifiëren is',
+        requirementsNotReviewed: 'De selectievereisten en perceelafbakening moeten nog in de officiële documenten worden beoordeeld.',
+        unknownDeadline: 'Dit dossier vermeldt geen uiterste indieningsdatum.', unknownValue: 'Dit dossier vermeldt geen geraamde opdrachtwaarde.',
+        nextReviewStep: 'Volgende stap', nextReviewCopy: 'Bekijk de bewaarde aankondiging en controleer daarna de deadline, perceelafbakening en selectievereisten in de officiële documenten.',
+        inspectNotice: 'Bekijk bewaarde aankondiging', inspectExampleNotice: 'Open voorbeeldaankondiging',
+        exampleProfileTitle: 'Verken het voorbeeldprofiel', examplePreferencesCopy: 'Deze voorbeeldvoorkeuren tonen hoe het bedrijfsprofiel werkt en zijn alleen-lezen. Gebruik uw eigen bedrijf om voorkeuren te wijzigen en op te slaan.',
+        matchBasis: 'Vergelijk deze signalen met de bedrijfsactiviteiten en voorkeuren.', viewMatchedProfile: 'Bekijk bedrijfsprofiel',
+        nextCheckDeadline: 'Controleer de uiterste indieningsdatum in de officiële aankondiging voordat u een offerte voorbereidt.',
+        nextCheckRequirements: 'Beoordeel de geëxtraheerde vereisten en hun perceelafbakening. Controleer daarna in de officiële documenten welk bedrijfsbewijs nodig is.',
+        nextCheckValue: 'Zoek de opdrachtwaarde en perceelafbakening op in de officiële documenten voordat u de capaciteit beoordeelt.',
+        noExtractedRequirements: 'Dit dossier bevat geen geëxtraheerde vereisten. Controleer de officiële documenten; er kunnen nog steeds vereisten gelden.',
+        requirementPage: 'Pagina', requirementMandatory: 'Als verplicht geregistreerd', requirementOptional: 'Als facultatief geregistreerd', requirementStatusUnknown: 'Verplicht karakter niet vermeld',
+        keyboardShortcuts: "Sneltoetsen",
+        keyboardHelp: "Focus een opdracht: ↑/↓ om te bladeren, Enter om te openen, S om te bewaren of verwijderen. Escape sluit het detailpaneel.",
+        checkSavedNotices: "Bewaarde opdrachten controleren",
+        retainedCheckScope: "Controles vergelijken bewaarde velden met bronrecords in deze databank, niet met een live bronupdate. Afzonderlijk geïdentificeerde aankondigingen worden hier niet gekoppeld.",
+        changesSinceSaving: "Wijzigingen sinds bewaren",
+        changesNotChecked: "Niet gecontroleerd",
+        checkingChanges: "Controleren…",
+        changesUnavailable: "Bronrecord niet beschikbaar",
+        noticeChanged: "Vastgestelde wijzigingen",
+        noRecordedChanges: "Geen wijzigingen in de bewaarde velden",
+        noticeRevision: "Aankondigingsversie",
+        retainedDeadlinePassed: "Deadline in het bronrecord is verstreken",
+        savedDeadlinePassed: "Bewaarde deadline is verstreken (niet opnieuw gecontroleerd)",
+        checkedAt: "Gecontroleerd (Brusselse tijd)",
+        revisionNotCompared: "Versievergelijking niet beschikbaar: geen vergelijkbare versie vastgelegd bij bewaren en controleren.",
+        workspaceNav: "Werkruimte",
+        opportunities: "Opdrachten",
+        shortlistNav: "Shortlist",
+        companyFilters: "Bedrijf en filters",
+        chooseCompany: "Kies uw bedrijf",
+        lookupHint: "Vul een Belgisch ondernemingsnummer in om opdrachten te vinden.",
+        evidenceFirst: "Bronnen in beeld",
+        welcomeTitle: "Een helderder vertrekpunt voor uw volgende opdracht.",
+        selectedOpportunity: "Geselecteerde opdracht",
+        closeSelection: "Geselecteerde opdracht sluiten",
+        tenderDetails: "Opdrachtdetails",
+        overview: "Overzicht",
+        evidence: "Bronnen",
+        filters: "Filters",
+        compareOpportunities: "Vergelijk uw opdrachten",
+        shortlistEmpty: "Uw shortlist is leeg",
+        shortlistEmptyHelp: "Bewaar opdrachten om bronnen, datums en waarden te vergelijken.",
+        backOpportunities: "Terug naar opdrachten",
+        shapeProfile: "Stel uw matchingprofiel samen",
+        preferencesUnchanged: "Geen niet-opgeslagen wijzigingen",
+        unsavedChanges: "Niet-opgeslagen wijzigingen",
+        discard: "Verwerpen",
+        closeFilters: "Filters sluiten",
+        resetFilters: "Filters wissen",
+        undo: "Ongedaan maken",
+        dismiss: "Melding sluiten",
+        sourceEvidenceHelp: "De informatie hieronder komt uit de bewaarde aankondiging. Controleer de toepasselijkheid in de officiële documenten.",
+        requirementsUnverified: "Vereisten te controleren",
+        shortlistUpdated: "Shortlist bijgewerkt.",
+        yourAssessment: "Uw beoordeling",
+        browserOnly: "Alleen in deze browser opgeslagen; geen brongegeven.",
+        reviewNote: "Uw notitie",
+        aboutTenderpad: 'Over Tenderpad',
+        nextAction: 'Volgende actie', followUpDate: 'Opvolgdatum', followUpHelp: 'Plan hier uw volgende actie. Opvolgdatums volgen de Brusselse tijd en verschijnen in deze browser; er worden geen meldingen verstuurd.',
+        followUpOverdue: 'Achterstallig', followUpToday: 'Vandaag opvolgen', followUpUpcoming: 'Gepland', followUpUnscheduled: 'Geen opvolgdatum', followUpDone: 'Afgerond',
+        markActionDone: 'Markeer als afgerond', reopenAction: 'Actie heropenen', invalidFollowUpDate: 'Vul een geldige opvolgdatum in.',
+        notReviewed: "Niet beoordeeld",
+        worthExploring: "Verder onderzoeken",
+        notPursuing: "Niet verderzetten",
+        changeUndone: "Wijziging ongedaan gemaakt.",
+        invalidPreferences: "Controleer de profielvelden en de opdrachtwaarden.",
+        documentTitle: 'Tenderpad · Belgische overheidsopdrachten', homeLabel: 'Tenderpad startpagina', languageLabel: 'Taal',
+        eyebrow: 'Belgische overheidsopdrachten', pageTitle: 'Jouw weg naar overheidsopdrachten.',
+        introCopy: 'Bekijk openstaande overheidsopdrachten die aansluiten bij uw activiteiten, locatie en ervaring. Elke aanbeveling licht de match toe, zodat u zelf beslist.',
+        decisionTitle: 'Ondersteuning bij uw beslissing', decisionCopy: 'Beoordeel elke kans aan de hand van de officiële aankondiging.',
+        searchTitle: 'Zoek opdrachten', enterpriseNumber: 'Belgisch ondernemingsnummer', sortBy: 'Sorteren op', bestMatch: 'Beste match',
+        soonestDeadline: 'Eerstvolgende deadline', closingDate: 'Uiterste datum', anyDeadline: 'Elke deadline', within7: 'Binnen 7 dagen',
+        within30: 'Binnen 30 dagen', within90: 'Binnen 90 dagen', findOpportunities: 'Zoek opdrachten', apiToken: 'API-token',
+        apiTokenPlaceholder: 'Alleen nodig als uw server dit vereist', resultsHeading: 'Aanbevolen opdrachten',
+        matchingProfile: 'Uw matchingprofiel', matchingProfileCopy: 'Deze aanpasbare voorkeuren beïnvloeden alleen de aanbevelingen; uw officiële KBO-registratie hierboven verandert niet.',
+        activitiesToMatch: 'Activiteiten voor matching', activitiesHelp: 'Beschrijf het werk waarvoor u opdrachten wilt ontvangen.',
+        excludeTerms: 'Uit te sluiten termen', preferredRegions: 'Voorkeursregio’s', languages: 'Talen', minimumValue: 'Minimale opdrachtwaarde',
+        maximumValue: 'Maximale opdrachtwaarde', recognitionClass: 'Erkenningsklasse (werken, 1–8)', recognitionCategories: 'Erkenningscategorieën',
+        recognitionLoading: 'Omschrijvingen en klassegrenzen van erkenningscategorieën laden…',
+        recognitionHelp: 'De Belgische erkenning van aannemers is ingedeeld in klassen 1–8 en categorieën. Aankondigingen vermelden soms de vereiste klasse of categorie. Geef uw erkenning op om hiervoor een waarschuwing te krijgen. Dit is nooit een oordeel over uw geschiktheid om in te schrijven.',
+        saveProfile: 'Voorkeuren opslaan', footer: 'Aanbevelingen zijn een vertrekpunt. Controleer altijd de officiële opdrachtdocumenten voordat u beslist om in te schrijven.',
+        registeredActivities: 'Geregistreerde activiteiten', officialKbo: 'Officiële KBO-gegevens', status: 'Status', noneFound: 'Geen gevonden',
+        fitScore: 'Matchscore', evidenceSignal: 'Onderbouwing', scoreGuideTitle: 'Hoe werken de scores?', scorePairLabel: 'Matchscore en onderbouwing',
+        scoreGuideCopy: 'De matchscore rangschikt hoe goed een aankondiging bij het bedrijfsprofiel past. De onderbouwing geeft positieve signalen weer uit vijf gebieden: sector, locatie, eerdere gunningen, erkenning en opdrachtwaarde. Geen van beide is een kans op gunning of een oordeel over geschiktheid.',
+        buyer: 'Aanbesteder', closingLabel: 'Uiterste datum', estimatedValue: 'Geraamde waarde', location: 'Locatie', cpv: 'CPV', language: 'Taal',
+        moreTenderDetails: 'Locatie, CPV en taal', whyMayFit: 'Waarom dit kan passen', otherSignals: 'Andere matchsignalen',
+        sourceRecord: 'Bronrecord', reviewOfficialNotice: 'Bekijk officiële aankondiging', moreActions: 'Meer acties', tender: 'Opdracht',
+        matchFeedback: 'Feedback over de match', viewDetails: 'Details bekijken', structuredAnalysis: 'Gestructureerde analyse', relevant: 'Relevant',
+        notRelevant: 'Niet relevant', checkManually: 'Handmatig controleren', requirementSignals: 'Signalen uit vereisten',
+        showRequirements: 'Geëxtraheerde vereisten tonen', loadingCompany: 'Bedrijf en opdrachten laden…',
+        noResults: 'Geen open opdrachten gevonden voor dit bedrijf en deze filters.',
+        noResultsHelp: 'Kies een langere periode of pas uw bedrijfsprofiel aan en zoek opnieuw.',
+        unknownBuyer: 'Onbekende aanbesteder', notStated: 'Niet vermeld', companyProfile: 'Bedrijfsprofiel', dataDetails: 'Gegevensdetails',
+        openProcurement: 'open opdracht', openProcurements: 'open opdrachten', unknownOpen: 'aantal open opdrachten onbekend', unknownTenderCount: 'aantal geladen opdrachten onbekend',
+        tenderLoaded: 'opdracht geladen', tendersLoaded: 'opdrachten geladen', freshData: 'Actuele gegevens', staleData: 'Gegevens zijn verouderd',
+        freshnessUnknown: 'Actualiteit niet bevestigd', dataUnavailable: 'Gegevensstatus kon niet worden geladen. Controleer de verbinding met de API-server.',
+        reasonLanguageMatch: 'De taal van de opdracht komt overeen met uw voorkeurstalen', reasonActivityMatch: 'De activiteit sluit aan bij de geregistreerde bedrijfsactiviteiten',
+        reasonRegionMatch: 'De locatie van de opdracht komt overeen met een vestigingsgemeente', reasonValueForReview: 'De opdrachtwaarde is beschikbaar voor een capaciteitsbeoordeling',
+        reasonValueWithinAward: 'De opdrachtwaarde valt binnen de eerdere gunningsrange', reasonPreviousAward: 'De CPV-categorie komt overeen met een eerder gegunde opdracht',
+        apiTokenRequired: 'Deze server vereist een API-token. Vul het hierboven in of voeg #token=... toe aan de URL.',
+        htmlResponse: 'De server gaf een HTML-pagina terug in plaats van API-gegevens. Open het dashboard via de Rust API-server.',
+        companyNotFound: 'Dit ondernemingsnummer staat niet in het ingestelde KBO-register. Controleer het nummer of de geladen bedrijfsgegevens.',
+        apiRouteMissing: 'De aangevraagde API-route bestaat niet. Controleer of de dashboard- en API-versie overeenkomen.',
+        serviceUnavailable: 'De dienst is tijdelijk niet beschikbaar. Probeer het straks opnieuw.', invalidSubmission: 'Controleer de ingevoerde gegevens en probeer opnieuw.',
+        requestFailed: 'Het verzoek is mislukt', couldNotLoad: 'Kon niet laden', companyResource: 'bedrijf', preferencesResource: 'matchingvoorkeuren',
+        recommendationsResource: 'aanbevelingen', networkUnavailable: 'De API is niet bereikbaar. Controleer of de Rust-server actief is en probeer opnieuw.',
+        resultsShown: 'Aanbevolen opdrachten getoond: {count} (max. 20 per zoekopdracht)', anyDeadlineSummary: 'elke deadline', deadlineWithinSummary: 'deadline binnen {days} dagen', shortlistScrollHint: 'Scroll horizontaal of focus de vergelijking en gebruik de pijltjestoetsen.', shortlistRegionLabel: 'Shortlist vergelijken',
+        sortedBestMatchSummary: 'beste match', sortedSoonestSummary: 'eerstvolgende deadline',
+        shortlistTitle: 'Vergelijk shortlist', compare: 'Vergelijk', shortlistIntro: 'Opgeslagen opdrachtgegevens zijn een momentopname. Controleer de actuele informatie in de officiële aankondiging.',
+        addToShortlist: 'Toevoegen aan shortlist', inShortlist: 'Op shortlist', removeFromShortlist: 'Verwijderen', addedToShortlist: 'Toegevoegd aan shortlist.',
+        removedFromShortlist: 'Verwijderd van shortlist.', shortlistMax: 'De shortlist bevat maximaal 5 opdrachten. Verwijder er één om een andere toe te voegen.', shortlistNotPersisted: 'Wijzigingen blijven alleen voor dit bezoek behouden; browseropslag is niet beschikbaar.',
+        savingRequiresToken: 'Opslaan vereist een API-token. Vul het in het veld boven de zoekbalk in.',
+        saveFailed: 'Kon de profielvoorkeuren niet opslaan', saveRefreshFailed: 'Voorkeuren opgeslagen, maar de aanbevelingen konden niet opnieuw worden geladen.',
+        saveSucceeded: 'Voorkeuren opgeslagen en aanbevelingen vernieuwd.',
+        cardLoading: 'Laden…', detailsLoaded: 'Details geladen', detailsUnavailable: 'Opdrachtdetails niet beschikbaar', retryDetails: 'Details opnieuw proberen',
+        description: 'Beschrijving', requirements: 'Vereisten', notAvailable: 'Niet beschikbaar', analyzing: 'Analyseren…',
+        analysisUnavailable: 'Gestructureerde analyse niet beschikbaar', retryAnalysis: 'Analyse opnieuw proberen', analyzed: 'Geanalyseerd',
+        activity: 'Activiteit', geography: 'Geografie', previousWork: 'Eerder werk', confidence: 'betrouwbaarheid',
+        pursuableQuestion: 'Geschikt om op in te schrijven?', yes: 'Ja', no: 'Nee', clear: 'Wissen', outcome: 'Resultaat', outcomeBid: 'ingediend', outcomeNoBid: 'niet ingediend', outcomeWon: 'gewonnen', outcomeLost: 'verloren',
+        feedbackRelevant: 'relevant', feedbackNotRelevant: 'niet relevant', feedbackPursuable: 'geschikt om op in te schrijven', feedbackNotPursuable: 'niet geschikt om op in te schrijven', feedbackUnset: 'geschiktheid niet opgegeven', feedbackOutcome: 'resultaat',
+        chooseRelevance: 'Beoordeel eerst als relevant of niet relevant', savingFeedback: 'Opslaan…', feedbackSaveFailed: 'Opslaan mislukt', retryFeedback: 'Opnieuw proberen', feedbackTokenRequired: 'API-token vereist', feedbackSaved: 'Opgeslagen', feedbackSavedAs: 'Opgeslagen als'
+      },
+      fr: {
+        tryExample: 'Essayer avec une entreprise fictive', exampleEntryHelp: 'Explorez des marchés fictifs avant de rechercher votre propre entreprise.',
+        exampleWorkspace: 'Espace de démonstration', exampleExplanation: 'Entreprise et avis fictifs, avec des scores illustratifs. Explorez la sélection, les sources et votre liste.',
+        useOwnCompany: 'Utiliser ma propre entreprise →', exampleCompany: 'Entreprise fictive', exampleCompanyData: 'Données d’entreprise fictives', exampleActivities: 'Activités fictives',
+        exampleSourceHelp: 'Le texte de l’avis ci-dessous est fictif et sert à illustrer l’examen des sources.', exampleNotice: 'Avis fictif de démonstration',
+        noMatchReasons: 'Aucun motif de correspondance n’a été fourni pour ce marché.', remainsUnverified: 'Ce qui reste à vérifier',
+        requirementsNotReviewed: 'Les exigences de sélection et le périmètre des lots restent à examiner dans les documents officiels.',
+        unknownDeadline: 'La date limite n’est pas indiquée dans ce dossier.', unknownValue: 'La valeur estimée du marché n’est pas indiquée dans ce dossier.',
+        nextReviewStep: 'Prochaine étape', nextReviewCopy: 'Examinez l’avis conservé, puis confirmez la date limite, le périmètre des lots et les exigences de sélection dans les documents officiels.',
+        inspectNotice: 'Examiner l’avis conservé', inspectExampleNotice: 'Ouvrir l’avis fictif',
+        exampleProfileTitle: 'Explorer le profil fictif', examplePreferencesCopy: 'Ces préférences fictives illustrent le profil de l’entreprise et sont en lecture seule. Utilisez votre propre entreprise pour modifier et enregistrer vos préférences.',
+        matchBasis: 'Comparez ces signaux aux activités et préférences de l’entreprise.', viewMatchedProfile: 'Voir le profil de l’entreprise',
+        nextCheckDeadline: 'Confirmez la date limite dans l’avis officiel avant de prévoir la préparation d’une offre.',
+        nextCheckRequirements: 'Examinez les exigences extraites et leur périmètre par lot, puis vérifiez les justificatifs nécessaires dans les documents officiels.',
+        nextCheckValue: 'Recherchez la valeur du marché et le périmètre des lots dans les documents officiels avant d’évaluer la capacité.',
+        noExtractedRequirements: 'Aucune exigence n’a été extraite de ce dossier. Vérifiez les documents officiels ; des exigences peuvent néanmoins s’appliquer.',
+        requirementPage: 'Page', requirementMandatory: 'Enregistrée comme obligatoire', requirementOptional: 'Enregistrée comme facultative', requirementStatusUnknown: 'Caractère obligatoire non indiqué',
+        keyboardShortcuts: "Raccourcis clavier",
+        keyboardHelp: "Placez le focus sur un marché : ↑/↓ pour parcourir, Entrée pour ouvrir, S pour enregistrer ou retirer. Échap ferme le panneau.",
+        checkSavedNotices: "Vérifier les marchés enregistrés",
+        retainedCheckScope: "La vérification compare les champs enregistrés aux avis conservés dans cette base, sans actualisation de la source en direct. Les avis identifiés séparément ne sont pas reliés ici.",
+        changesSinceSaving: "Modifications depuis l’enregistrement",
+        changesNotChecked: "Non vérifié",
+        checkingChanges: "Vérification…",
+        changesUnavailable: "Avis indisponible",
+        noticeChanged: "Modifications constatées",
+        noRecordedChanges: "Aucune modification des champs enregistrés",
+        noticeRevision: "Version de l’avis",
+        retainedDeadlinePassed: "Échéance de l’avis conservé dépassée",
+        savedDeadlinePassed: "Échéance enregistrée dépassée (non revérifiée)",
+        checkedAt: "Vérifié (heure de Bruxelles)",
+        revisionNotCompared: "Comparaison des versions indisponible : aucune version comparable conservée à l’enregistrement et à la vérification.",
+        workspaceNav: "Espace de travail",
+        opportunities: "Marchés",
+        shortlistNav: "Sélection",
+        companyFilters: "Entreprise et filtres",
+        chooseCompany: "Choisissez votre entreprise",
+        lookupHint: "Saisissez un numéro d’entreprise belge pour trouver des marchés.",
+        evidenceFirst: "Les sources en vue",
+        welcomeTitle: "Un point de départ plus clair pour votre prochain marché.",
+        selectedOpportunity: "Marché sélectionné",
+        closeSelection: "Fermer le marché sélectionné",
+        tenderDetails: "Détails du marché",
+        overview: "Aperçu",
+        evidence: "Sources",
+        filters: "Filtres",
+        compareOpportunities: "Comparez vos marchés",
+        shortlistEmpty: "Votre sélection est vide",
+        shortlistEmptyHelp: "Enregistrez des marchés pour comparer sources, dates et montants.",
+        backOpportunities: "Retour aux marchés",
+        shapeProfile: "Affinez votre profil de matching",
+        preferencesUnchanged: "Aucune modification à enregistrer",
+        unsavedChanges: "Modifications non enregistrées",
+        discard: "Annuler",
+        closeFilters: "Fermer les filtres",
+        resetFilters: "Réinitialiser les filtres",
+        undo: "Rétablir",
+        dismiss: "Fermer la notification",
+        sourceEvidenceHelp: "Les informations ci-dessous proviennent de l’avis conservé. Vérifiez leur portée dans les documents officiels.",
+        requirementsUnverified: "Exigences à vérifier",
+        shortlistUpdated: "Sélection mise à jour.",
+        yourAssessment: "Votre appréciation",
+        browserOnly: "Enregistré dans ce navigateur uniquement ; pas une donnée source.",
+        reviewNote: "Votre note",
+        aboutTenderpad: 'À propos de Tenderpad',
+        nextAction: 'Prochaine action', followUpDate: 'Date de suivi', followUpHelp: 'Planifiez votre prochaine action ici. Les dates de suivi utilisent l’heure de Bruxelles et s’affichent dans ce navigateur ; aucune notification n’est envoyée.',
+        followUpOverdue: 'En retard', followUpToday: 'À suivre aujourd’hui', followUpUpcoming: 'À venir', followUpUnscheduled: 'Aucune date de suivi', followUpDone: 'Terminée',
+        markActionDone: 'Marquer comme terminée', reopenAction: 'Rouvrir l’action', invalidFollowUpDate: 'Saisissez une date de suivi valide.',
+        notReviewed: "Non examiné",
+        worthExploring: "À approfondir",
+        notPursuing: "Ne pas poursuivre",
+        changeUndone: "Modification annulée.",
+        invalidPreferences: "Vérifiez les champs du profil et les montants du marché.",
+        documentTitle: 'Tenderpad · Marchés publics belges', homeLabel: 'Accueil Tenderpad', languageLabel: 'Langue',
+        eyebrow: 'Marchés publics belges', pageTitle: 'Votre voie vers les marchés publics.',
+        introCopy: 'Découvrez les marchés publics ouverts correspondant aux activités, à la région et à l’expérience de votre entreprise. Chaque recommandation explique son raisonnement pour vous laisser décider.',
+        decisionTitle: 'Une aide à la décision, pas un verdict', decisionCopy: 'Vérifiez chaque opportunité dans l’avis officiel.',
+        searchTitle: 'Rechercher des opportunités', enterpriseNumber: 'Numéro d’entreprise belge', sortBy: 'Trier par', bestMatch: 'Meilleure correspondance',
+        soonestDeadline: 'Échéance la plus proche', closingDate: 'Date limite', anyDeadline: 'Toute échéance', within7: 'Dans les 7 jours',
+        within30: 'Dans les 30 jours', within90: 'Dans les 90 jours', findOpportunities: 'Rechercher', apiToken: 'Jeton API',
+        apiTokenPlaceholder: 'Uniquement si votre serveur l’exige', resultsHeading: 'Marchés recommandés',
+        matchingProfile: 'Votre profil de matching', matchingProfileCopy: 'Ces préférences modifiables influencent uniquement les recommandations ; elles ne changent pas votre inscription officielle à la BCE ci-dessus.',
+        activitiesToMatch: 'Activités à prendre en compte', activitiesHelp: 'Décrivez les travaux pour lesquels vous souhaitez recevoir des recommandations.',
+        excludeTerms: 'Termes à exclure', preferredRegions: 'Régions préférées', languages: 'Langues', minimumValue: 'Valeur minimale du marché',
+        maximumValue: 'Valeur maximale du marché', recognitionClass: 'Classe d’agréation (travaux, 1–8)', recognitionCategories: 'Catégories d’agréation',
+        recognitionLoading: 'Chargement des descriptions et limites de classe des catégories d’agréation…',
+        recognitionHelp: 'L’agréation belge des entrepreneurs est répartie en classes 1–8 et en catégories. Les avis indiquent parfois la classe ou la catégorie requise. Renseignez votre agréation pour recevoir un avertissement à ce sujet. Elle ne constitue jamais un verdict sur votre admissibilité.',
+        saveProfile: 'Enregistrer les préférences', footer: 'Les recommandations sont un point de départ. Consultez toujours les documents officiels du marché avant de décider de soumissionner.',
+        registeredActivities: 'Activités enregistrées', officialKbo: 'Données officielles BCE', status: 'Statut', noneFound: 'Aucune activité trouvée',
+        fitScore: 'Score de correspondance', evidenceSignal: 'Éléments à l’appui', scoreGuideTitle: 'Comprendre les scores', scorePairLabel: 'Scores de correspondance et éléments à l’appui',
+        scoreGuideCopy: 'Le score classe le degré de correspondance entre un avis et le profil de l’entreprise. Les éléments à l’appui reflètent des signaux positifs dans cinq domaines : secteur, région, marchés précédemment attribués, agréation et valeur du marché. Aucun des deux n’est une probabilité de remporter le marché ni une décision d’admissibilité.',
+        buyer: 'Pouvoir adjudicateur', closingLabel: 'Date limite', estimatedValue: 'Valeur estimée', location: 'Région', cpv: 'CPV', language: 'Langue',
+        moreTenderDetails: 'Région, CPV et langue', whyMayFit: 'Pourquoi cela pourrait convenir', otherSignals: 'Autres signaux de correspondance',
+        sourceRecord: 'Référence source', reviewOfficialNotice: 'Consulter l’avis officiel', moreActions: 'Autres actions', tender: 'Marché',
+        matchFeedback: 'Retour sur la correspondance', viewDetails: 'Voir les détails', structuredAnalysis: 'Analyse structurée', relevant: 'Pertinent',
+        notRelevant: 'Non pertinent', checkManually: 'À vérifier manuellement', requirementSignals: 'Signaux des exigences',
+        showRequirements: 'Afficher les exigences extraites', loadingCompany: 'Chargement de l’entreprise et des marchés…',
+        noResults: 'Aucun marché ouvert ne correspond à cette entreprise et à ces filtres.',
+        noResultsHelp: 'Choisissez une période plus longue ou modifiez le profil de l’entreprise, puis relancez la recherche.',
+        unknownBuyer: 'Pouvoir adjudicateur inconnu', notStated: 'Non précisé', companyProfile: 'Profil de l’entreprise', dataDetails: 'Détails des données',
+        openProcurement: 'marché ouvert', openProcurements: 'marchés ouverts', unknownOpen: 'nombre de marchés ouverts inconnu', unknownTenderCount: 'nombre de marchés chargés inconnu',
+        tenderLoaded: 'marché chargé', tendersLoaded: 'marchés chargés', freshData: 'Données à jour', staleData: 'Données obsolètes',
+        freshnessUnknown: 'Actualité non vérifiée', dataUnavailable: 'Impossible de charger le statut des données. Vérifiez la connexion au serveur API.',
+        reasonLanguageMatch: 'La langue du marché correspond à vos langues préférées', reasonActivityMatch: 'L’activité correspond aux activités enregistrées de l’entreprise',
+        reasonRegionMatch: 'La région du marché correspond à une commune de l’entreprise', reasonValueForReview: 'La valeur du marché est disponible pour évaluer la capacité',
+        reasonValueWithinAward: 'La valeur du marché se situe dans la fourchette des marchés précédemment attribués', reasonPreviousAward: 'La catégorie CPV correspond à un marché précédemment attribué',
+        apiTokenRequired: 'Ce serveur exige un jeton API. Saisissez-le ci-dessus ou ajoutez #token=... à l’URL.',
+        htmlResponse: 'Le serveur a renvoyé une page HTML au lieu des données API. Ouvrez le tableau de bord via le serveur API Rust.',
+        companyNotFound: 'Ce numéro d’entreprise ne figure pas dans le registre BCE configuré. Vérifiez le numéro ou les données chargées.',
+        apiRouteMissing: 'La route API demandée est introuvable. Vérifiez que les versions du tableau de bord et de l’API correspondent.',
+        serviceUnavailable: 'Le service est temporairement indisponible. Réessayez dans quelques instants.', invalidSubmission: 'Vérifiez les informations saisies et réessayez.',
+        requestFailed: 'La requête a échoué', couldNotLoad: 'Impossible de charger', companyResource: 'l’entreprise', preferencesResource: 'les préférences de matching',
+        recommendationsResource: 'les recommandations', networkUnavailable: 'L’API est inaccessible. Vérifiez que le serveur Rust fonctionne, puis réessayez.',
+        resultsShown: 'Marchés affichés : {count} (20 maximum par recherche)', anyDeadlineSummary: 'toute échéance', deadlineWithinSummary: 'échéance dans les {days} jours', shortlistScrollHint: 'Faites défiler horizontalement ou placez le focus sur la comparaison et utilisez les flèches.', shortlistRegionLabel: 'Comparaison de la liste',
+        sortedBestMatchSummary: 'meilleure correspondance', sortedSoonestSummary: 'échéance la plus proche',
+        shortlistTitle: 'Liste à comparer', compare: 'Comparer', shortlistIntro: 'Les détails enregistrés sont une copie instantanée. Vérifiez les informations à jour dans l’avis officiel.',
+        addToShortlist: 'Ajouter à la liste', inShortlist: 'Dans la liste', removeFromShortlist: 'Retirer', addedToShortlist: 'Ajouté à la liste.',
+        removedFromShortlist: 'Retiré de la liste.', shortlistMax: 'La liste est limitée à 5 marchés. Retirez-en un pour en ajouter un autre.', shortlistNotPersisted: 'Modifications conservées pour cette visite uniquement ; le stockage du navigateur est indisponible.',
+        savingRequiresToken: 'Un jeton API est requis pour enregistrer. Saisissez-le dans le champ au-dessus de la recherche.',
+        saveFailed: 'Impossible d’enregistrer les préférences', saveRefreshFailed: 'Préférences enregistrées, mais impossible d’actualiser les recommandations.',
+        saveSucceeded: 'Préférences enregistrées et recommandations actualisées.',
+        cardLoading: 'Chargement…', detailsLoaded: 'Détails chargés', detailsUnavailable: 'Détails du marché indisponibles', retryDetails: 'Réessayer les détails',
+        description: 'Description', requirements: 'Exigences', notAvailable: 'Non disponible', analyzing: 'Analyse…',
+        analysisUnavailable: 'Analyse structurée indisponible', retryAnalysis: 'Réessayer l’analyse', analyzed: 'Analysé',
+        activity: 'Activité', geography: 'Géographie', previousWork: 'Expérience antérieure', confidence: 'confiance',
+        pursuableQuestion: 'Soumission envisageable ?', yes: 'Oui', no: 'Non', clear: 'Effacer', outcome: 'Résultat', outcomeBid: 'offre déposée', outcomeNoBid: 'pas d’offre', outcomeWon: 'remporté', outcomeLost: 'perdu',
+        feedbackRelevant: 'pertinent', feedbackNotRelevant: 'non pertinent', feedbackPursuable: 'soumission envisageable', feedbackNotPursuable: 'soumission non envisageable', feedbackUnset: 'possibilité de soumission non renseignée', feedbackOutcome: 'résultat',
+        chooseRelevance: 'Indiquez d’abord si le marché est pertinent', savingFeedback: 'Enregistrement…', feedbackSaveFailed: 'Échec de l’enregistrement', retryFeedback: 'Réessayer', feedbackTokenRequired: 'Jeton API requis', feedbackSaved: 'Enregistré', feedbackSavedAs: 'Enregistré comme'
+      }
+    };
+    const languageSelect = document.querySelector('#ui-language');
+    const resultsSummary = document.querySelector('#results-summary');
+    const uiLanguageStorageKey = `${exampleWorkspace.storagePrefix}uiLanguage`;
+    let uiLanguage = 'en';
+    try {
+      const savedLanguage = localStorage.getItem(uiLanguageStorageKey);
+      if (Object.hasOwn(uiCopy, savedLanguage)) uiLanguage = savedLanguage;
+    } catch {}
+    const linkedLanguage = new URL(location.href).searchParams.get('lang');
+    if (Object.hasOwn(uiCopy, linkedLanguage)) uiLanguage = linkedLanguage;
+    const t = key => {
+      const translatedKey = exampleWorkspace.copyKey(key);
+      return uiCopy[uiLanguage]?.[translatedKey] || uiCopy.en[translatedKey] || key;
+    };
+    const numberLocales = {en: 'en-BE', nl: 'nl-BE', fr: 'fr-BE'};
+    const numberLocale = () => numberLocales[uiLanguage] || numberLocales.en;
+    const formatNumber = (value, options = {}) => new Intl.NumberFormat(numberLocale(), options).format(value);
+    const formatDate = value => {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value ?? ''));
+      if (!match) return String(value ?? '');
+      const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12));
+      return new Intl.DateTimeFormat(numberLocale(), {day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'}).format(date);
+    };
+    function updateResultsSummary() {
+      if (resultsSummary.dataset.count === undefined) return;
+      const count = resultsSummary.dataset.count;
+      const parts = [t('resultsShown').replace('{count}', count)];
+      parts.push(resultsSummary.dataset.dueWithin
+        ? t('deadlineWithinSummary').replace('{days}', resultsSummary.dataset.dueWithin)
+        : t('anyDeadlineSummary'));
+      parts.push(t(resultsSummary.dataset.sort === 'deadline' ? 'sortedSoonestSummary' : 'sortedBestMatchSummary'));
+      resultsSummary.textContent = parts.join(' · ');
+    }
+    function applyUiLanguage(language) {
+      if (!Object.hasOwn(uiCopy, language)) return;
+      uiLanguage = language;
+      document.documentElement.lang = language;
+      document.title = t('documentTitle');
+      document.querySelectorAll('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
+      document.querySelectorAll('[data-i18n-content]').forEach(element => element.setAttribute('content', t(element.dataset.i18nContent)));
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(element => element.setAttribute('placeholder', t(element.dataset.i18nPlaceholder)));
+      document.querySelectorAll('[data-i18n-aria-label]').forEach(element => element.setAttribute('aria-label', t(element.dataset.i18nAriaLabel)));
+      document.querySelectorAll('[data-product-page]').forEach(link => { link.href = `/welcome/?lang=${language}`; });
+      document.querySelectorAll('[data-real-workspace]').forEach(link => { link.href = `/?lang=${language}`; });
+      document.querySelectorAll('[data-example-workspace]').forEach(link => { link.href = `/?example=1&lang=${language}`; });
+      document.querySelectorAll('[data-health-summary]').forEach(element => {
+        const openCount = element.dataset.openCount;
+        const openLabel = openCount === '' ? t('unknownOpen') : `${openCount} ${t(Number(openCount) === 1 ? 'openProcurement' : 'openProcurements')}`;
+        const tenderCount = element.dataset.tenderCount;
+        const tenderLabel = tenderCount === '' ? t('unknownTenderCount') : `${tenderCount} ${t(Number(tenderCount) === 1 ? 'tenderLoaded' : 'tendersLoaded')}`;
+        element.textContent = `${openLabel} · ${tenderLabel}`;
+      });
+      document.querySelectorAll('[data-format-number]').forEach(element => {
+        const value = Number(element.dataset.formatNumber);
+        if (Number.isFinite(value)) element.textContent = formatNumber(value, {maximumFractionDigits: 1});
+      });
+      document.querySelectorAll('[data-format-currency]').forEach(element => {
+        const value = element.dataset.formatCurrency;
+        if (comparableAmount(value) !== undefined) element.textContent = formatValue(value);
+      });
+      document.querySelectorAll('[data-format-date]').forEach(element => {
+        element.textContent = formatDate(element.dataset.formatDate);
+      });
+      updateResultsSummary();
+      languageSelect.value = language;
+    }
+    languageSelect.addEventListener('change', () => {
+      try { localStorage.setItem(uiLanguageStorageKey, languageSelect.value); } catch {}
+      applyUiLanguage(languageSelect.value);
+      const url = new URL(location.href);
+      if (url.searchParams.has('lang')) {
+        url.searchParams.set('lang', uiLanguage);
+        history.replaceState(null, '', url.pathname + url.search + url.hash);
+      }
+      renderShortlist();
+    });
+    applyUiLanguage(uiLanguage);
+
+    const form = document.querySelector('#lookup-form');
+    const message = document.querySelector('#message');
+    const health = document.querySelector('#health');
+    const company = document.querySelector('#company');
+    const preferences = document.querySelector('#preferences');
+    const results = document.querySelector('#results');
+    const heading = document.querySelector('#results-heading');
+    const shortlistPanel = document.querySelector('#shortlist-panel');
+    const shortlistCount = document.querySelector('#shortlist-count');
+    const shortlistContent = document.querySelector('#shortlist-content');
+    shortlistContent.addEventListener('keydown', event => {
+      if (event.target !== shortlistContent) return;
+      const maximum = Math.max(0, shortlistContent.scrollWidth - shortlistContent.clientWidth);
+      const next = event.key === 'ArrowRight' ? Math.min(maximum, shortlistContent.scrollLeft + 80)
+        : event.key === 'ArrowLeft' ? Math.max(0, shortlistContent.scrollLeft - 80)
+          : event.key === 'Home' ? 0 : event.key === 'End' ? maximum : null;
+      if (next === null || next === shortlistContent.scrollLeft) return;
+      event.preventDefault();
+      shortlistContent.scrollLeft = next;
+    });
+    const shortlistLimit = 5;
+    let shortlist = [];
+    let shortlistEnterpriseNumber = '';
+    let activeEnterpriseNumber = '';
+    // Monotonic id for the search flow: a slower earlier search must not render
+    // over a newer one, which used to leave one company's profile shown with
+    // another company's rankings (and then post feedback to the wrong one).
+    let searchSequence = 0;
+    // One explicit owner for the company-scoped UI workflow. The sequence is a
+    // generation token; status describes the current transition, not a second
+    // source of truth for which company owns the rendered results.
+    const dashboardFlow = { sequence: 0, status: 'idle' };
+    const dashboardTransitions = {
+      idle: ['loading-company', 'saving-preferences'],
+      'loading-company': ['loading-preferences', 'error', 'loading-company', 'saving-preferences'],
+      'loading-preferences': ['loading-recommendations', 'error', 'loading-company', 'saving-preferences'],
+      'loading-recommendations': ['ready', 'error', 'loading-company', 'saving-preferences'],
+      'saving-preferences': ['refreshing-recommendations', 'error', 'loading-company', 'saving-preferences'],
+      'refreshing-recommendations': ['ready', 'saved-refresh-failed', 'error', 'loading-company', 'saving-preferences'],
+      ready: ['loading-company', 'saving-preferences'],
+      error: ['loading-company', 'saving-preferences'],
+      'saved-refresh-failed': ['loading-company', 'saving-preferences'],
+    };
+    function transitionDashboardFlow(sequence, next) {
+      if (dashboardFlow.sequence !== sequence || !dashboardTransitions[dashboardFlow.status]?.includes(next)) return false;
+      dashboardFlow.status = next;
+      return true;
+    }
+    function beginDashboardFlow(status) {
+      const sequence = ++searchSequence;
+      dashboardFlow.sequence = sequence;
+      if (!transitionDashboardFlow(sequence, status)) throw new Error(`Invalid dashboard transition to ${status}`);
+      return sequence;
+    }
+    let activeSort = 'score';
+    let activeDueWithin = '';
+
+    const tokenField = document.querySelector('#api-token');
+    const bootstrapUrl = new URL(location.href);
+    const fragment = new URLSearchParams(bootstrapUrl.hash.slice(1));
+    // Fragments are not sent in HTTP requests; query tokens are no longer
+    // accepted as credentials because the initial request may log them.
+    const bootstrapToken = exampleWorkspace.active ? '' : (fragment.get('token') || '').trim();
+    if (bootstrapToken) { try { localStorage.setItem('aanbestedingen_token', bootstrapToken); } catch {} }
+    if (fragment.has('token') || bootstrapUrl.searchParams.has('token')) {
+      if (fragment.has('token')) {
+        fragment.delete('token');
+        bootstrapUrl.hash = fragment.toString();
+      }
+      // Clean up legacy query-token URLs too, but never use their secret.
+      // This cannot undo exposure from the already-sent initial request.
+      bootstrapUrl.searchParams.delete('token');
+      history.replaceState(null, '', bootstrapUrl.pathname + bootstrapUrl.search + bootstrapUrl.hash);
+    }
+    try { tokenField.value = exampleWorkspace.active ? '' : bootstrapToken || localStorage.getItem('aanbestedingen_token') || ''; } catch { tokenField.value = bootstrapToken; }
+    tokenField.addEventListener('change', () => {
+      if (exampleWorkspace.active) return;
+      const value = tokenField.value.trim();
+      try {
+        if (value) localStorage.setItem('aanbestedingen_token', value);
+        else localStorage.removeItem('aanbestedingen_token');
+      } catch {}
+    });
+
+    async function apiFetch(url, options = {}) {
+      if (exampleWorkspace.active) return exampleWorkspace.request(url, options);
+      const token = tokenField.value.trim();
+      const headers = {...(options.headers || {})};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const response = await fetch(url, {...options, headers});
+      if (response.status === 401) {
+        message.textContent = t('apiTokenRequired');
+        message.className = 'error';
+      }
+      return response;
+    }
+
+    const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    }[c]));
+    const shortlistIdentity = item => JSON.stringify([item.source, item.external_id]);
+    const shortlistStorageKey = enterpriseNumber => `${exampleWorkspace.storagePrefix}shortlist.v1:${encodeURIComponent(enterpriseNumber)}`;
+    function loadShortlist(enterpriseNumber) {
+      shortlistEnterpriseNumber = enterpriseNumber;
+      shortlist = [];
+      try {
+        const saved = JSON.parse(localStorage.getItem(shortlistStorageKey(enterpriseNumber)) || '[]');
+        if (Array.isArray(saved)) {
+          shortlist = saved.filter(item => item && typeof item.source === 'string' && typeof item.external_id === 'string'
+            && typeof item.title === 'string' && typeof item.buyer === 'string'
+            && (typeof item.deadline === 'string' || item.deadline === null)
+            && comparableAmount(item.estimated_value) !== undefined
+            && (typeof item.score === 'number' || item.score === null)
+            && (typeof item.confidence === 'number' || item.confidence === null)
+            && (typeof item.source_url === 'string' || item.source_url === null)).slice(0, shortlistLimit).map(item => ({...item, assessment: validAssessment(item.assessment), note: typeof item.note === 'string' ? item.note.slice(0, 1000) : '', notice_revision: validSavedRevision(item.notice_revision), ...shortlistFollowUp(item)}));
+        }
+      } catch {}
+      renderShortlist();
+    }
+    function persistShortlist() {
+      try {
+        localStorage.setItem(shortlistStorageKey(shortlistEnterpriseNumber), JSON.stringify(shortlist));
+        return true;
+      } catch { return false; }
+    }
+    function safeNoticeUrl(value) {
+      try {
+        const url = new URL(value);
+        return url.protocol === 'https:' ? url.href : '';
+      } catch { return ''; }
+    }
+    function syncShortlistButtons() {
+      document.querySelectorAll('[data-shortlist-toggle]').forEach(button => {
+        const saved = shortlist.some(item => shortlistIdentity(item) === button.dataset.shortlistKey);
+        const key = saved ? 'inShortlist' : 'addToShortlist';
+        button.dataset.i18n = key;
+        button.setAttribute('aria-pressed', String(saved));
+        button.textContent = t(key);
+      });
+    }
+    function updateShortlistKeyboardAccess() {
+      shortlistContent.tabIndex = shortlistContent.scrollWidth > shortlistContent.clientWidth ? 0 : -1;
+    }
+    function renderShortlist() {
+      updateShortlistNavigation();
+      if (!shortlistEnterpriseNumber || !shortlist.length) {
+        shortlistPanel.classList.add('hidden');
+        shortlistCount.textContent = '';
+        shortlistContent.innerHTML = '';
+        syncShortlistButtons();
+        return;
+      }
+      shortlistPanel.classList.remove('hidden');
+      shortlistCount.textContent = `${shortlist.length}/${shortlistLimit}`;
+      shortlistCount.setAttribute('aria-label', `${shortlist.length} ${t('shortlistTitle')}`);
+      const columns = shortlist.map(item => {
+        const title = safeNoticeUrl(item.source_url)
+          ? `<a href="${escapeHtml(safeNoticeUrl(item.source_url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.title)}</a>`
+          : escapeHtml(item.title);
+        return `<th scope="col"><span class="shortlist-title">${title}</span><button class="secondary" type="button" data-shortlist-remove="${escapeHtml(shortlistIdentity(item))}" aria-label="${escapeHtml(t('removeFromShortlist'))}: ${escapeHtml(item.title)}">${escapeHtml(t('removeFromShortlist'))}</button></th>`;
+      }).join('');
+      const fields = [
+        [t('buyer'), item => item.buyer || t('notStated')],
+        [t('closingLabel'), item => item.deadline ? formatDate(item.deadline) : t('notStated')],
+        [t('estimatedValue'), item => item.estimated_value === null ? t('notStated') : formatValue(item.estimated_value)],
+        [t('fitScore'), item => item.score === null ? '—' : formatNumber(item.score, {maximumFractionDigits: 1})],
+        [t('evidenceSignal'), item => item.confidence === null ? '—' : `${Math.round(item.confidence * 100)}/100`],
+      ];
+      const rows = fields.map(([label, value]) => `<tr><th scope="row">${escapeHtml(label)}</th>${shortlist.map(item => `<td>${escapeHtml(value(item))}</td>`).join('')}</tr>`).join('');
+      shortlistContent.innerHTML = `<table class="shortlist-table"><caption class="sr-only">${escapeHtml(t('shortlistTitle'))}</caption><thead><tr><th scope="col">${escapeHtml(t('compare'))}</th>${columns}</tr></thead><tbody>${renderShortlistFollowUps()}${rows}${renderShortlistChanges()}${renderShortlistAssessments()}</tbody></table>`;
+      bindShortlistAssessments();
+      bindShortlistFollowUps();
+      shortlistContent.setAttribute('aria-label', t('shortlistRegionLabel'));
+      updateShortlistKeyboardAccess();
+      shortlistContent.querySelectorAll('[data-shortlist-remove]').forEach(button => {
+        button.addEventListener('click', () => {
+          const restoreFocus = document.activeElement === button;
+          const removedIdentity = button.dataset.shortlistRemove;
+          recordShortlistUndo();
+          const removedIndex = shortlist.findIndex(item => shortlistIdentity(item) === removedIdentity);
+          shortlist = shortlist.filter(item => shortlistIdentity(item) !== removedIdentity);
+          const nextFocusIndex = Math.min(Math.max(removedIndex, 0), shortlist.length - 1);
+          const nextFocusIdentity = shortlist.length ? shortlistIdentity(shortlist[nextFocusIndex]) : null;
+          const persisted = persistShortlist();
+          renderShortlist();
+          notifyShortlistChange(persisted);
+          if (restoreFocus) {
+            const nextRemoveButton = Array.from(shortlistContent.querySelectorAll('[data-shortlist-remove]'))
+              .find(candidate => candidate.dataset.shortlistRemove === nextFocusIdentity);
+            (nextRemoveButton || document.querySelector('#shortlist-empty [data-go-view]'))?.focus();
+          }
+          message.textContent = persisted ? t('removedFromShortlist') : t('shortlistNotPersisted');
+          message.className = 'muted';
+        });
+      });
+      syncShortlistButtons();
+    }
+    async function apiErrorText(response, resource) {
+      if (response.status === 401) return t('apiTokenRequired');
+      const contentType = response.headers?.get?.('content-type') || '';
+      const body = await response.text().catch(() => '');
+      let detail = '';
+      try {
+        const payload = JSON.parse(body);
+        if (typeof payload?.detail === 'string') detail = payload.detail;
+      } catch {}
+      if (/text\/html/i.test(contentType) || /<!doctype\s+html|<html\b/i.test(body)) {
+        return t('htmlResponse');
+      }
+      if (resource === 'company' && response.status === 404 && detail === 'company not found') {
+        return t('companyNotFound');
+      }
+      if (response.status === 404) return t('apiRouteMissing');
+      if (response.status >= 500) return t('serviceUnavailable');
+      if (response.status === 400) return detail || t('invalidSubmission');
+      return `${t('requestFailed')} (HTTP ${response.status}).`;
+    }
+
+    apiFetch('/health').then(response => response.json()).then(status => {
+      // Coverage, not just freshness: say how far the data reaches, and admit
+      // when rows predate the column that records it.
+      const from = status.tenders_oldest_publication_date;
+      const to = status.tenders_newest_publication_date;
+      const unknown = status.tenders_publication_unknown_rows || 0;
+      const coverage = from && to
+        ? `publications ${from} to ${to}${unknown ? ` (${unknown} older rows without a date)` : ''}`
+        : 'publication dates not recorded for the stored rows yet';
+      // What a company can actually be matched against today, and whether we can
+      // vouch for it: a large store with almost nothing open is what a stale
+      // deployment looked like when this was invisible.
+      const open = status.tenders_open_procurements;
+      const freshness = status.tenders_freshness || 'unknown';
+      const openLabel = typeof open === 'number'
+        ? `${open} ${t(open === 1 ? 'openProcurement' : 'openProcurements')}`
+        : t('unknownOpen');
+      const freshnessLabel = freshness === 'fresh'
+        ? t('freshData')
+        : freshness === 'stale' ? t('staleData') : t('freshnessUnknown');
+      // Award history is 15% of the score and scores neutrally when absent, so
+      // say when only a handful of companies have it on file.
+      const covered = status.award_history_companies;
+      const historyLabel = typeof covered === 'number'
+        ? (covered === 0 ? 'no award history (scores use neutral defaults)' : `award history for ${covered} ${covered === 1 ? 'company' : 'companies'}`)
+        : '';
+      // Which population the last run drew from: a 30-day refresh and a
+      // backfill read very differently, and the scope/window says which. A run
+      // that stopped short records `refresh-partial` and no coverage, so it must
+      // not read like a small complete day: say partial, and only print "of N"
+      // when TED's population was actually covered.
+      const run = status.last_refresh;
+      const partial = typeof run?.kind === 'string' && run.kind.endsWith('-partial');
+      const provenance = run
+        ? `last run ${run.scope} ${run.window} (${run.fetched} fetched${partial ? ', partial' : ''}${run.total_notice_count != null ? ` of ${run.total_notice_count}` : ''})`
+        : '';
+      // Evidence as of that run, not live: openness is deadline-relative and
+      // goes stale, while the mix below is time-invariant. Absent on stores
+      // whose last run predates the snapshot (or on backfill-chunk rows).
+      const evidence = run && run.evidence
+        ? `evidence as of last run: ${run.evidence.stated} stated, ${run.evidence.hinted} hinted, ${run.evidence.unknown} unknown of ${run.evidence.opportunities} opportunities`
+        : '';
+      const recognition = status.recognition_register
+        ? `recognition register ${status.recognition_register.approval_rows} approvals as of ${status.recognition_register.register_as_of}; KBO join snapshot ${status.recognition_register.kbo_snapshot_as_of}`
+        : 'no recognition register snapshot loaded';
+      const tenderCount = typeof status.tenders === 'number'
+        ? (status.tenders === 1 ? `1 ${t('tenderLoaded')}` : `${status.tenders} ${t('tendersLoaded')}`)
+        : t('unknownTenderCount');
+      const openCountData = typeof open === 'number' && Number.isFinite(open) ? String(open) : '';
+      const tenderCountData = typeof status.tenders === 'number' && Number.isFinite(status.tenders) ? String(status.tenders) : '';
+      const freshnessKey = freshness === 'fresh' ? 'freshData' : freshness === 'stale' ? 'staleData' : 'freshnessUnknown';
+      const details = [coverage, `last refresh ${status.tenders_last_fetched || 'unknown'}`, provenance, evidence, historyLabel, recognition]
+        .filter(Boolean).join(' · ');
+      health.innerHTML = `<div class="health-summary"><span data-health-summary data-open-count="${openCountData}" data-tender-count="${tenderCountData}">${escapeHtml(`${openLabel} · ${tenderCount}`)}</span><span class="health-freshness" data-state="${escapeHtml(freshness)}" data-i18n="${freshnessKey}">${escapeHtml(freshnessLabel)}</span></div><details class="health-details"><summary data-i18n="dataDetails">${t('dataDetails')}</summary><div>${escapeHtml(details)}</div></details>`;
+      applyUiLanguage(uiLanguage);
+    }).catch(() => { health.textContent = t('dataUnavailable'); });
+
+    function renderCompany(profile) {
+      const activityLabel = a => {
+        const code = String(a.code ?? '').trim();
+        const description = [a.dutch, a.french].find(value =>
+          typeof value === 'string' && value.trim() && value.trim() !== code
+        );
+        return description ? description.trim() : `NACE-BEL activity ${code}`;
+      };
+      const activities = profile.activities.map(a =>
+        `<li><code>${escapeHtml(a.code)}</code><span>${escapeHtml(activityLabel(a))}</span></li>`
+      ).join('');
+      company.innerHTML = `<div class="panel">
+        <h2>${escapeHtml(profile.names[0] || profile.enterprise_number)}</h2>
+        <div class="meta"><span>${escapeHtml(profile.enterprise_number)}</span><span><span data-i18n="status">${t('status')}</span>: ${escapeHtml(profile.status)}</span></div>
+        <h3><span data-i18n="registeredActivities">${t('registeredActivities')}</span> <span class="source-badge" data-i18n="officialKbo">${t('officialKbo')}</span></h3><ul class="activity-list">${activities || `<li data-i18n="noneFound">${t('noneFound')}</li>`}</ul>
+      </div>
+      <div id="company-inventory-awards"></div>
+      <div id="company-tender-awards"></div>`;
+      applyUiLanguage(uiLanguage);
+      company.classList.remove('hidden');
+      preferences.classList.remove('hidden');
+      loadAwardHistory(profile.enterprise_number, searchSequence);
+      loadTenderAwardHistory(profile.enterprise_number, searchSequence);
+      document.querySelector('#confirmed-activities').value = profile.activities
+        .map(activityLabel).join(', ');
+      activeEnterpriseNumber = profile.enterprise_number;
+      loadShortlist(activeEnterpriseNumber);
+      workspaceCompanyLoaded(profile);
+    }
+
+    // A company's own awarded contracts as recorded in the Brussels inventories.
+    // The data was imported but read by nothing; showing it also explains the
+    // "previous award" reasons in the ranking below.
+    async function loadAwardHistory(enterpriseNumber, sequence) {
+      const target = document.querySelector('#company-inventory-awards');
+      if (!target) return;
+      const response = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/inventory-awards?limit=5`)
+        .catch(() => null);
+      if (!response || !response.ok || sequence !== searchSequence) return;
+      const value = await response.json();
+      if (sequence !== searchSequence) return;
+      const engagements = value.engagements || [];
+      if (!engagements.length) return;
+      const rows = engagements.map(e => {
+        const amount = e.engagement_amount ? `€${Number(e.engagement_amount).toLocaleString('nl-BE')}` : 'amount unknown';
+        const liquidations = e.accounting_rows > 1 ? ` <span class="muted">(${e.accounting_rows} accounting rows)</span>` : '';
+        return `<li>${escapeHtml(e.engagement_date || 'date unknown')} — ${escapeHtml(amount)} · ${escapeHtml(e.buyer_name || 'buyer unknown')}${liquidations}<br><span class="muted">${escapeHtml(e.object || '')}</span></li>`;
+      }).join('');
+      const panel = document.createElement('div');
+      panel.className = 'panel';
+      panel.innerHTML = `<h3>Recorded award history</h3>
+        <p class="muted">${escapeHtml(value.note)} — ${escapeHtml(String(value.accounting_rows))} accounting rows over ${engagements.length} shown engagement(s).</p>
+        <ul>${rows}</ul>`;
+      target.appendChild(panel);
+    }
+
+    // TED/BOSA award records are distinct from the Brussels accounting inventory.
+    // Keep BOSA lot-linked evidence visible, but never imply that omitted amounts are zero.
+    async function loadTenderAwardHistory(enterpriseNumber, sequence) {
+      const target = document.querySelector('#company-tender-awards');
+      if (!target) return;
+      const response = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/awards?limit=10`)
+        .catch(() => null);
+      if (!response || !response.ok || sequence !== searchSequence) return;
+      const value = await response.json();
+      if (sequence !== searchSequence) return;
+      const awards = value.awards || [];
+      if (!awards.length) return;
+      const rows = awards.map(a => {
+        const cpvs = (a.cpv_codes || []).join(', ');
+        const winners = (a.winner_names || []).join(', ');
+        const lots = (a.lot_evidence || []).map(lot => {
+          const details = [lot.lot_id, (lot.cpv_codes || []).join(', '), lot.participation]
+            .filter(Boolean).join(' · ');
+          return `<li>${escapeHtml(details)}${lot.multi_supplier_lot ? ' · multiple suppliers linked' : ''}</li>`;
+        }).join('');
+        const links = (a.links || []).filter(url => typeof url === 'string' && /^https?:\/\//i.test(url))
+          .map(url => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">source</a>`).join(' · ');
+        const references = (a.publication_references || []).join(', ');
+        const values = (a.values || []).map(value => String(value));
+        const valueEvidence = values.length
+          ? `${values.join(', ')} — ${a.amount_note || 'source-reported TED value; currency metadata unavailable'}`
+          : (a.amount_note || '');
+        return `<li><strong>${escapeHtml(a.source)} · ${escapeHtml(a.publication_number)}</strong> — ${escapeHtml(a.title || 'Title unavailable')}<br>
+          <span class="muted">${escapeHtml(a.buyer || 'Buyer unknown')}${winners ? ` · ${escapeHtml(winners)}` : ''}${cpvs ? ` · CPV ${escapeHtml(cpvs)}` : ''}${references ? ` · BDA ${escapeHtml(references)}` : ''}</span>
+          ${lots ? `<ul>${lots}</ul>` : ''}
+          <span class="muted">${escapeHtml(valueEvidence)}${links ? ` · ${links}` : ''}</span></li>`;
+      }).join('');
+      const panel = document.createElement('div');
+      panel.className = 'panel';
+      panel.innerHTML = `<h3>TED and BOSA award history</h3>
+        <p class="muted">${escapeHtml(value.note)} (${awards.length} shown)</p>
+        <ul>${rows}</ul>`;
+      target.appendChild(panel);
+    }
+
+    async function loadPreferences(enterpriseNumber, sequence) {
+      const response = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/preferences`);
+      if (sequence !== searchSequence) return false;
+      if (!response.ok) {
+        throw new Error(await apiErrorText(response, 'profile corrections'));
+      }
+      const value = await response.json();
+      if (sequence !== searchSequence) return false;
+      document.querySelector('#confirmed-activities').value = value.confirmed_activities.join(', ');
+      document.querySelector('#excluded-terms').value = value.excluded_terms.join(', ');
+      document.querySelector('#preferred-regions').value = value.preferred_regions.join(', ');
+      document.querySelector('#languages').value = value.languages.join(', ');
+      document.querySelector('#minimum-value').value = value.minimum_value ?? '';
+      document.querySelector('#maximum-value').value = value.maximum_value ?? '';
+      document.querySelector('#recognition-class').value = value.recognition_class ?? '';
+      document.querySelector('#recognition-categories').value = (value.recognition_categories || []).join(', ');
+      renderRecognitionGlossary();
+      capturePreferenceBaseline();
+      return true;
+    }
+
+    function splitValues(value) {
+      return value.split(',').map(item => item.trim()).filter(Boolean);
+    }
+
+    let recognitionReference = null;
+    const recognitionCategoryInput = document.querySelector('#recognition-categories');
+    function renderRecognitionGlossary() {
+      const output = document.querySelector('#recognition-glossary');
+      if (!recognitionReference) return;
+      const labels = splitValues(recognitionCategoryInput.value).map(code => {
+        const item = recognitionReference.categories.find(category => category.code === code.toUpperCase());
+        return item ? `${item.code}: ${item.description_nl}` : null;
+      }).filter(Boolean);
+      const currency = value => new Intl.NumberFormat('nl-BE', {
+        style: 'currency', currency: 'EUR', maximumFractionDigits: 0
+      }).format(value);
+      const bands = recognitionReference.classes.map(item => item.maximum_amount_eur != null
+        ? `${item.class}: tot ${currency(item.maximum_amount_eur)}`
+        : `${item.class}: meer dan ${currency(item.above_amount_eur)}`);
+      output.textContent = `${labels.length ? `${labels.join(' · ')}. ` : ''}Klassebedragen: ${bands.join(' · ')}.`;
+    }
+    recognitionCategoryInput.addEventListener('input', renderRecognitionGlossary);
+    async function loadRecognitionReference() {
+      const response = await apiFetch('/reference/recognition').catch(() => null);
+      if (!response || !response.ok) {
+        document.querySelector('#recognition-glossary').textContent = 'Recognition reference data unavailable.';
+        return;
+      }
+      recognitionReference = await response.json();
+      document.querySelector('#recognition-category-options').innerHTML = recognitionReference.categories
+        .map(item => `<option value="${escapeHtml(item.code)}" label="${escapeHtml(item.description_nl)}"></option>`)
+        .join('');
+      renderRecognitionGlossary();
+    }
+    loadRecognitionReference();
+
+    document.querySelector('#save-preferences').addEventListener('click', async () => {
+      if (preferenceSaving || !activeEnterpriseNumber || !preferencesDirty()) return;
+      const fieldsValid = preferenceIds.every(id => document.querySelector(`#${id}`).reportValidity());
+      const minimum = document.querySelector('#minimum-value').value;
+      const maximum = document.querySelector('#maximum-value').value;
+      if (!fieldsValid) {
+        message.textContent = t('invalidPreferences'); message.className = 'error'; return;
+      }
+      const sequence = beginDashboardFlow('saving-preferences');
+      const enterpriseNumber = activeEnterpriseNumber;
+      const sort = activeSort;
+      const dueWithin = activeDueWithin;
+      const body = {
+        confirmed_activities: splitValues(document.querySelector('#confirmed-activities').value),
+        excluded_terms: splitValues(document.querySelector('#excluded-terms').value),
+        preferred_regions: splitValues(document.querySelector('#preferred-regions').value),
+        languages: splitValues(document.querySelector('#languages').value),
+        minimum_value: minimum || null,
+        maximum_value: maximum || null,
+        recognition_class: document.querySelector('#recognition-class').value
+          ? parseInt(document.querySelector('#recognition-class').value, 10) : null,
+        recognition_categories: splitValues(document.querySelector('#recognition-categories').value)
+      };
+      setPreferenceSaving(true);
+      let saved = false;
+      try {
+        const response = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/preferences`, {
+          method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)
+        });
+        if (sequence !== searchSequence) return;
+        if (!response.ok) throw new Error(response.status === 401 ? t('savingRequiresToken') : await apiErrorText(response, 'profile corrections'));
+        saved = true;
+        capturePreferenceBaseline();
+        if (!transitionDashboardFlow(sequence, 'refreshing-recommendations')) return;
+        const due = dueWithin ? `&due_within=${dueWithin}` : '';
+        const recommendations = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/recommendations?limit=20&sort=${sort}${due}`);
+        if (sequence !== searchSequence) return;
+        if (!recommendations.ok) throw new Error(t('saveRefreshFailed'));
+        const items = await recommendations.json();
+        if (sequence !== searchSequence) return;
+        if (!Array.isArray(items)) throw new Error(t('saveRefreshFailed'));
+        renderResults(items, enterpriseNumber);
+        transitionDashboardFlow(sequence, 'ready');
+        message.textContent = t('saveSucceeded'); message.className = 'muted';
+        showWorkspaceToast(t('saveSucceeded'));
+        rememberWorkspace();
+      } catch (error) {
+        if (sequence !== searchSequence) return;
+        transitionDashboardFlow(sequence, saved ? 'saved-refresh-failed' : 'error');
+        message.textContent = saved ? t('saveRefreshFailed') : error instanceof TypeError ? t('saveFailed') : error.message;
+        message.className = 'error';
+      } finally {
+        if (sequence === searchSequence) setPreferenceSaving(false);
+      }
+    });
+
+    // Pure judging helpers, tested in scripts/dashboard-bootstrap.test.cjs.
+    // Omitted dimensions are unchanged; null explicitly clears a dimension.
+    // An unset stored pursuability still falls back to relevance for scoring.
+    function feedbackPayload(source, externalId, relevant, pursuable, outcome) {
+      const payload = {source: source, external_id: externalId, relevant: relevant};
+      if (pursuable === true || pursuable === false || pursuable === null) payload.pursuable = pursuable;
+      if (outcome === null || typeof outcome === 'string' && outcome !== '') payload.outcome = outcome;
+      return payload;
+    }
+    function feedbackStateLabel(relevant, pursuable, outcome) {
+      const parts = [t(relevant ? 'feedbackRelevant' : 'feedbackNotRelevant')];
+      parts.push(t(pursuable === true ? 'feedbackPursuable' : pursuable === false ? 'feedbackNotPursuable' : 'feedbackUnset'));
+      const outcomeKeys = {bid: 'outcomeBid', 'no-bid': 'outcomeNoBid', won: 'outcomeWon', lost: 'outcomeLost'};
+      if (typeof outcome === 'string' && outcome !== '') parts.push(`${t('feedbackOutcome')}: ${t(outcomeKeys[outcome] || outcome)}`);
+      return parts.join(' · ');
+    }
+    // END-FEEDBACK-HELPERS
+
+    function formatValue(value) {
+      if (value === null || value === undefined || value === '') return t('notStated');
+      return comparableAmount(value) !== undefined
+        ? new Intl.NumberFormat(numberLocale(), {style: 'currency', currency: 'EUR', minimumFractionDigits: 0, maximumFractionDigits: 2}).format(String(value))
+        : String(value);
+    }
+
+    // BEGIN-ATTACHMENT-EVIDENCE
+    function renderAttachmentEvidence(raw) {
+      const records = Array.isArray(raw?.bosa_attachment_evidence) ? raw.bosa_attachment_evidence : [];
+      const entries = records.flatMap(record => {
+        const signals = Array.isArray(record?.signals) ? record.signals : [];
+        return signals.filter(signal => typeof signal?.text === 'string').map(signal => {
+          const page = Number.isSafeInteger(signal.source_page) && signal.source_page > 0 ? `, page ${signal.source_page}` : '';
+          const name = typeof record.original_name === 'string' ? record.original_name : 'Attachment';
+          const version = typeof record.version_id === 'string' ? record.version_id : 'unknown';
+          return `<li><strong>${escapeHtml(name)}</strong>${escapeHtml(page)} <span class="muted">(version ${escapeHtml(version)})</span>: ${escapeHtml(signal.text)}</li>`;
+        });
+      });
+      if (!entries.length) return '';
+      return `<details><summary>Attachment hints for manual review (${entries.length})</summary><p>Keyword matches may be irrelevant or incomplete. They are not verified requirements and do not affect the score.</p><ul>${entries.join('')}</ul></details>`;
+    }
+    // END-ATTACHMENT-EVIDENCE
+
+    // BEGIN-LOT-CPV-EVIDENCE
+    function renderNoticeLotCpvEvidence(raw) {
+      const records = Array.isArray(raw?.notice_lot_cpv_evidence) ? raw.notice_lot_cpv_evidence : [];
+      const shown = records.slice(0, 20).flatMap(record => {
+        const codes = Array.isArray(record?.cpv_codes)
+          ? [...new Set(record.cpv_codes.filter(code => typeof code === 'string' && code.trim()).map(code => code.trim().slice(0, 32)))].slice(0, 10)
+          : [];
+        if (!codes.length) return [];
+        const lotId = typeof record.lot_id === 'string' && record.lot_id.trim()
+          ? record.lot_id.trim().slice(0, 128)
+          : 'Lot identifier unavailable';
+        return [`<li>${escapeHtml(lotId)}: ${codes.map(escapeHtml).join(', ')}</li>`];
+      });
+      if (!shown.length) return '';
+      const capped = records.length > 20 || records.some(record => Array.isArray(record?.cpv_codes) && record.cpv_codes.length > 10);
+      return `<details><summary>Notice CPVs by lot (extracted evidence; not separately scored)</summary><p>Verify lot scope against the source notice; this extraction is informational, not a relevance or eligibility decision.${capped ? ' Display limited to 20 lots and 10 CPVs per lot.' : ''}</p><ul>${shown.join('')}</ul></details>`;
+    }
+    // END-LOT-CPV-EVIDENCE
+
+    // BEGIN-LOT-NACE-ALIGNMENT
+    function renderLotCpvNaceAlignment(alignment) {
+      const lots = Array.isArray(alignment?.lots) ? alignment.lots : [];
+      if (!lots.length) return '';
+      const shown = lots.slice(0, 20).map(lot => {
+        const lotId = typeof lot?.lot_id === 'string' && lot.lot_id.trim()
+          ? lot.lot_id.trim().slice(0, 128)
+          : 'Lot identifier unavailable';
+        const cpvs = Array.isArray(lot?.cpv_codes)
+          ? [...new Set(lot.cpv_codes.filter(code => typeof code === 'string' && code.trim()).map(code => code.trim().slice(0, 32)))].slice(0, 10)
+          : [];
+        const overlaps = Array.isArray(lot?.overlaps) ? lot.overlaps : [];
+        const matchLines = overlaps.slice(0, 10).flatMap(match => {
+          const cpvCode = typeof match?.cpv_code === 'string' ? match.cpv_code.trim().slice(0, 32) : '';
+          const naceCodes = Array.isArray(match?.nace_codes)
+            ? [...new Set(match.nace_codes.filter(code => typeof code === 'string' && code.trim()).map(code => code.trim().slice(0, 16)))].slice(0, 10)
+            : [];
+          const level = match?.match_level === 'class' ? 'NACE class'
+            : match?.match_level === 'division' ? 'NACE division' : '';
+          return cpvCode && naceCodes.length && level
+            ? [`${cpvCode} ↔ ${naceCodes.map(code => `NACE ${code}`).join(', ')} (${level})`]
+            : [];
+        });
+        const explanation = matchLines.length
+          ? matchLines.join('; ')
+          : cpvs.length ? 'No direct overlap in the current crosswalk.' : 'No valid lot CPV was extracted.';
+        return `<li>${escapeHtml(lotId)}${cpvs.length ? ` (CPVs ${cpvs.map(escapeHtml).join(', ')})` : ''}: ${escapeHtml(explanation)}</li>`;
+      });
+      const capped = alignment?.truncated === true || lots.length > 20 || lots.some(lot => (Array.isArray(lot?.cpv_codes) && lot.cpv_codes.length > 10) || (Array.isArray(lot?.overlaps) && lot.overlaps.length > 10));
+      return `<details><summary>Lot-to-NACE crosswalk (informational only)</summary><p>Extracted lot CPVs compared with this company's stored KBO activity codes. This does not affect the score and is not a relevance or eligibility decision; no direct overlap does not rule out a fit.${capped ? ' Display limited to 20 lots and 10 codes per lot.' : ''}</p><ul>${shown.join('')}</ul></details>`;
+    }
+    // END-LOT-NACE-ALIGNMENT
+
+    // BEGIN-FRAMEWORK-MAXIMUM-EVIDENCE
+    function renderFrameworkMaximumEvidence(raw) {
+      const records = Array.isArray(raw?.framework_maximum_evidence) ? raw.framework_maximum_evidence : [];
+      const shown = records.slice(0, 20).flatMap(record => {
+        const amount = typeof record?.amount === 'string' || typeof record?.amount === 'number'
+          ? String(record.amount).trim().slice(0, 64)
+          : '';
+        if (!amount) return [];
+        const currency = typeof record.currency_id === 'string' && record.currency_id.trim()
+          ? ` ${escapeHtml(record.currency_id.trim().slice(0, 16))}`
+          : '';
+        const scope = record.scope === 'lot'
+          ? `Lot ${typeof record.lot_id === 'string' && record.lot_id.trim() ? escapeHtml(record.lot_id.trim().slice(0, 128)) : 'identifier unavailable'}`
+          : record.scope === 'notice' ? 'Notice-wide' : 'Scope not identified';
+        return [`<li>${scope}: ${escapeHtml(amount)}${currency}</li>`];
+      });
+      if (!shown.length) return '';
+      const capped = raw?.framework_maximum_evidence_truncated === true || records.length > 20;
+      return `<details><summary>Framework ceiling evidence (not estimated spend)</summary><p>Currency identifiers are source metadata and are not converted. Duplicate notice- and lot-scoped declarations are retained separately; do not sum them without checking the notice.${capped ? ' Display limited to 20 declarations.' : ''}</p><ul>${shown.join('')}</ul></details>`;
+    }
+    // END-FRAMEWORK-MAXIMUM-EVIDENCE
+
+    // Each card has independent detail, analysis, and feedback workflows.
+    // One in-flight operation per card/action; only success or failure can finish it.
+    const cardOperations = new WeakMap();
+    function beginCardOperation(card, name) {
+      if (!['detail', 'analysis', 'feedback'].includes(name)) return false;
+      let operations = cardOperations.get(card);
+      if (!operations) { operations = {}; cardOperations.set(card, operations); }
+      const current = operations[name] || 'idle';
+      if (current === 'loading') return false;
+      operations[name] = 'loading';
+      return true;
+    }
+    function finishCardOperation(card, name, status) {
+      const operations = cardOperations.get(card);
+      if (!operations || !['detail', 'analysis', 'feedback'].includes(name)
+          || operations[name] !== 'loading' || !['succeeded', 'failed'].includes(status)) return false;
+      operations[name] = status;
+      return true;
+    }
+    function setFeedbackPending(card, pending) {
+      card.querySelectorAll('[data-feedback], [data-pursuable], [data-outcome]')
+        .forEach(control => { control.disabled = pending; });
+    }
+
+    function renderRequirementEvidence(value) {
+      const requirements = Array.isArray(value) ? value.filter(requirement => typeof requirement?.text === 'string' && requirement.text.trim()) : [];
+      if (!requirements.length) return `<p data-i18n="noExtractedRequirements">${escapeHtml(t('noExtractedRequirements'))}</p>`;
+      return `<ul>${requirements.map(requirement => {
+        const status = requirement.mandatory === true ? 'requirementMandatory' : requirement.mandatory === false ? 'requirementOptional' : 'requirementStatusUnknown';
+        const page = Number.isSafeInteger(requirement.source_page) && requirement.source_page > 0
+          ? ` · <span data-i18n="requirementPage">${escapeHtml(t('requirementPage'))}</span> ${requirement.source_page}` : '';
+        return `<li>${requirement.kind ? `${escapeHtml(requirement.kind)}: ` : ''}${escapeHtml(requirement.text)}<br><span class="field-help"><span data-i18n="${status}">${escapeHtml(t(status))}</span>${page}</span></li>`;
+      }).join('')}</ul>`;
+    }
+
+    function renderResults(items, enterpriseNumber) {
+      closeTenderSelection(false);
+      heading.classList.remove('hidden');
+      resultsSummary.dataset.count = String(items.length);
+      resultsSummary.dataset.sort = activeSort;
+      resultsSummary.dataset.dueWithin = activeDueWithin;
+      resultsSummary.classList.remove('hidden');
+      if (!items.length) {
+        results.innerHTML = `<div class="panel empty-state"><strong data-i18n="noResults">${t('noResults')}</strong><p data-i18n="noResultsHelp">${t('noResultsHelp')}</p></div>`;
+        applyUiLanguage(uiLanguage);
+        return;
+      }
+      results.innerHTML = `<details class="score-guide"><summary data-i18n="scoreGuideTitle">${t('scoreGuideTitle')}</summary><p data-i18n="scoreGuideCopy">${t('scoreGuideCopy')}</p></details>${items.map(item => {
+        const reasonValues = Array.isArray(item.reasons)
+          ? item.reasons.filter(reason => typeof reason === 'string' && reason.trim())
+          : [];
+        const activityReasonIndex = reasonValues.findIndex(reason =>
+          reason.toLowerCase().includes('activity matches registered company activities')
+        );
+        const primaryReasonIndex = activityReasonIndex >= 0 ? activityReasonIndex : (reasonValues.length ? 0 : -1);
+        const primaryReason = primaryReasonIndex >= 0 ? reasonValues[primaryReasonIndex] : '';
+        const otherReasons = reasonValues.filter((_, index) => index !== primaryReasonIndex);
+        const reasonKeys = {
+          'Tender language matches preferred languages': 'reasonLanguageMatch',
+          'Tender activity matches registered company activities': 'reasonActivityMatch',
+          'Tender location matches a company municipality': 'reasonRegionMatch',
+          'Contract value is available for capacity review': 'reasonValueForReview',
+          'Contract value is within the previous award range': 'reasonValueWithinAward',
+          'CPV category matches a previous awarded contract': 'reasonPreviousAward',
+        };
+        const renderReason = reason => reasonKeys[reason]
+          ? `<span data-i18n="${reasonKeys[reason]}">${escapeHtml(t(reasonKeys[reason]))}</span>`
+          : escapeHtml(reason);
+        const warnings = (Array.isArray(item.warnings) ? item.warnings : []).filter(x => typeof x === 'string' && x.trim()).map(x => `<li>${escapeHtml(x)}</li>`).join('');
+        const signals = item.requirement_signals?.map(x => `<li>${escapeHtml(x.label)}${x.values?.length ? `: ${x.values.map(escapeHtml).join(', ')}` : ''}</li>`).join('') || '';
+        const requirements = item.requirements?.map(x => `<li><span class="muted">${escapeHtml(x.kind)}:</span> ${escapeHtml(x.text)}</li>`).join('') || '';
+        const register = item.recognition_evidence;
+        const comparison = register?.comparison;
+        const recognitionSource = register?.statement_source === 'description'
+          ? 'notice description (unstructured text)'
+          : 'structured selection criteria';
+        const lotAggregationNote = register?.lot_aggregation_needs_review
+          ? '<p class="muted">The notice ties the required class to the combined value of awarded lots; this comparison does not calculate that class.</p>'
+          : '';
+        const recognitionStatuses = {
+          requirement_not_structured_enough: 'Requirement has multiple or ambiguous categories/classes; no comparison made',
+          current_dated_approval_found: 'Matching approval with a recorded expiry on/after the register date',
+          approval_found_but_expiry_unknown: 'Matching approval listed, but its expiry date is unknown',
+          expired_approval_found: 'Matching approval is recorded as expired by the register date',
+          future_dated_approval_found: 'Matching approval has a decision date after the register date',
+          approval_found_with_uncertain_dates: 'Matching approval found, but its dates are uncertain',
+          no_matching_approval_in_snapshot: 'No matching approval found among exact KBO-joined rows in this snapshot'
+        };
+        const lotNaceAlignment = renderLotCpvNaceAlignment(item.lot_cpv_alignment);
+        const registerEvidence = register && comparison ? `<details><summary>Recognition register evidence (not an eligibility decision)</summary>
+          <p class="muted">${escapeHtml(recognitionStatuses[comparison.status] || comparison.status)}. Register as of ${escapeHtml(register.register_as_of)}; local KBO snapshot dated ${escapeHtml(register.kbo_snapshot_as_of)}.</p>
+          ${comparison.required_category || comparison.required_class ? `<p>Recognition statement in ${escapeHtml(recognitionSource)}: category ${escapeHtml(comparison.required_category || 'not stated')}, class ${escapeHtml(comparison.required_class ?? 'not stated')}.</p>` : ''}
+          ${lotAggregationNote}
+          ${comparison.evidence?.length ? `<ul>${comparison.evidence.map(e => {
+            const live = e.kbo_match?.status === 'exact_live_api';
+            const identitySource = live
+              ? `live KBO check at ${escapeHtml(e.kbo_match.verified_at_utc)}${e.kbo_match.current_status ? ` (status ${escapeHtml(e.kbo_match.current_status)})` : ''}`
+              : 'local KBO snapshot';
+            return `<li>${escapeHtml(e.category)}${e.category_description_nl ? ` — ${escapeHtml(e.category_description_nl)}` : ''}, class ${escapeHtml(e.class)}; ${escapeHtml(e.validity_as_of)} (register row ${escapeHtml(e.source_row)}; identity checked against ${identitySource})</li>`;
+          }).join('')}</ul>` : ''}
+          <p class="muted">This is register evidence only. Confirm current status and tender-specific legal requirements with the official source.</p></details>` : '';
+        const regions = item.regions?.length ? item.regions.join(', ') : t('notStated');
+        const cpv = item.cpv_codes?.length ? item.cpv_codes.join(', ') : t('notStated');
+        const languages = item.languages?.length ? item.languages.join(', ') : t('notStated');
+        const frameworkAmounts = Array.isArray(item.framework_maximum_amounts)
+          ? item.framework_maximum_amounts.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
+          : [];
+        const frameworkAmountMeta = frameworkAmounts.length
+          ? `<span>Framework maximum${frameworkAmounts.length > 1 ? ' amounts' : ' amount'} (ceiling, not estimated spend; currency and lot scope shown in details when retained${frameworkAmounts.length > 1 ? '; do not sum without checking the notice' : ''}): ${frameworkAmounts.slice(0, 5).map(escapeHtml).join(', ')}${frameworkAmounts.length > 5 ? `, and ${frameworkAmounts.length - 5} more in the notice` : ''}</span>`
+          : '';
+        const buyer = item.buyer || t('unknownBuyer');
+        const deadline = item.deadline ? formatDate(item.deadline) : t('notStated');
+        const estimatedValueAmount = item.estimated_value == null || comparableAmount(item.estimated_value) === undefined ? null : item.estimated_value;
+        const estimatedValue = estimatedValueAmount === null ? t('notStated') : formatValue(estimatedValueAmount);
+        const fitScoreNumber = item.score != null && Number.isFinite(Number(item.score)) ? Number(item.score) : null;
+        const fitScore = fitScoreNumber === null ? '—' : formatNumber(fitScoreNumber, {maximumFractionDigits: 1});
+        const evidenceValue = typeof item.confidence === 'number' && Number.isFinite(item.confidence)
+          ? Math.round(item.confidence * 100)
+          : null;
+        const evidenceValueLabel = evidenceValue === null ? '—' : String(evidenceValue);
+        const evidenceScale = evidenceValue === null ? '' : '/100';
+        const shortlistKey = shortlistIdentity(item);
+        const isShortlisted = shortlist.some(saved => shortlistIdentity(saved) === shortlistKey);
+        const shortlistLabelKey = isShortlisted ? 'inShortlist' : 'addToShortlist';
+        const nextReviewKey = !item.deadline ? 'nextCheckDeadline'
+          : requirements ? 'nextCheckRequirements'
+          : estimatedValueAmount === null ? 'nextCheckValue' : 'nextReviewCopy';
+
+        const savedFeedback = typeof item.saved_feedback?.relevant === 'boolean' ? item.saved_feedback : null;
+        const savedPursuable = typeof savedFeedback?.pursuable === 'boolean' ? String(savedFeedback.pursuable) : '';
+        return `<article class="card" data-source="${escapeHtml(item.source)}" data-id="${escapeHtml(item.external_id)}" data-topic="${savedFeedback ? String(savedFeedback.relevant) : ''}" data-pursuable="${savedPursuable}">
+          ${exampleWorkspace.active ? `<p class="example-card-label" data-i18n="exampleNotice">${t('exampleNotice')}</p>` : ''}
+          <div class="card-head"><strong>${escapeHtml(item.title)}</strong><div class="score-pair" aria-label="Fit and evidence scores" data-i18n-aria-label="scorePairLabel"><span class="score score-fit"><strong${fitScoreNumber === null ? '' : ` data-format-number="${escapeHtml(fitScoreNumber)}"`}>${escapeHtml(fitScore)}</strong><span class="score-scale">/100</span><small class="score-label" data-i18n="fitScore">${t('fitScore')}</small></span><span class="score score-evidence" title="Evidence signal reflects positive support across sector, location, previous awards, recognition, and value; it is not a probability."><strong>${escapeHtml(evidenceValueLabel)}</strong><span class="score-scale">${evidenceScale}</span><small class="score-label" data-i18n="evidenceSignal">${t('evidenceSignal')}</small></span></div></div>
+          <div class="triage-facts"><div class="triage-fact"><span class="triage-fact-label" data-i18n="buyer">${t('buyer')}</span><strong>${escapeHtml(buyer)}</strong></div><div class="triage-fact"><span class="triage-fact-label" data-i18n="closingLabel">${t('closingLabel')}</span><strong${item.deadline ? ` data-format-date="${escapeHtml(item.deadline)}"` : ''}>${escapeHtml(deadline)}</strong></div><div class="triage-fact"><span class="triage-fact-label" data-i18n="estimatedValue">${t('estimatedValue')}</span><strong${estimatedValueAmount !== null ? ` data-format-currency="${escapeHtml(estimatedValueAmount)}"` : ''}>${escapeHtml(estimatedValue)}</strong></div></div>
+          <div class="tender-overview"><details class="more-tender-details"><summary data-i18n="moreTenderDetails">${t('moreTenderDetails')}</summary><div class="meta"><span><span data-i18n="location">${t('location')}</span>: ${escapeHtml(regions)}</span><span><span data-i18n="cpv">${t('cpv')}</span>: ${escapeHtml(cpv)}</span><span><span data-i18n="language">${t('language')}</span>: ${escapeHtml(languages)}</span>${frameworkAmountMeta}</div></details>
+          <section class="decision-summary">
+            <div class="match-evidence"><h3 data-i18n="whyMayFit">${t('whyMayFit')}</h3><p class="primary-reason">${primaryReason ? renderReason(primaryReason) : `<span data-i18n="noMatchReasons">${t('noMatchReasons')}</span>`}</p>${otherReasons.length ? `<details><summary><span data-i18n="otherSignals">${t('otherSignals')}</span> (${otherReasons.length})</summary><ul class="reasons">${otherReasons.map(reason => `<li>${renderReason(reason)}</li>`).join('')}</ul></details>` : ''}<p class="summary-basis" data-i18n="matchBasis">${t('matchBasis')}</p><button class="secondary" type="button" data-review-profile data-i18n="viewMatchedProfile">${t('viewMatchedProfile')}</button></div>
+            <div class="decision-unknowns"><h3 data-i18n="remainsUnverified">${t('remainsUnverified')}</h3><p data-i18n="requirementsNotReviewed">${t('requirementsNotReviewed')}</p>${warnings || !item.deadline || estimatedValueAmount === null ? `<ul class="warnings">${warnings}${!item.deadline ? `<li data-i18n="unknownDeadline">${t('unknownDeadline')}</li>` : ''}${estimatedValueAmount === null ? `<li data-i18n="unknownValue">${t('unknownValue')}</li>` : ''}</ul>` : ''}</div>
+            <div class="decision-next"><h3 data-i18n="nextReviewStep">${t('nextReviewStep')}</h3><p data-i18n="${nextReviewKey}">${t(nextReviewKey)}</p><button class="secondary" type="button" data-review-evidence data-i18n="inspectNotice">${t('inspectNotice')}</button></div>
+          </section>
+          ${signals ? `<div><strong data-i18n="requirementSignals">${t('requirementSignals')}</strong><ul class="warnings">${signals}</ul></div>` : ''}
+          ${requirements ? `<details><summary data-i18n="showRequirements">${t('showRequirements')}</summary><ul class="warnings">${requirements}</ul></details>` : ''}
+          ${registerEvidence}
+          ${lotNaceAlignment}
+          <div class="source-line"><span class="index-mark" aria-hidden="true"></span><span data-i18n="sourceRecord">${t('sourceRecord')}</span><code>${escapeHtml(item.source)} · ${escapeHtml(item.external_id)}</code></div>
+
+          </div><div class="actions">
+            ${safeNoticeUrl(item.source_url) ? `<a class="primary-action" href="${escapeHtml(safeNoticeUrl(item.source_url))}" target="_blank" rel="noopener noreferrer"><span data-i18n="reviewOfficialNotice">${t('reviewOfficialNotice')}</span> <span aria-hidden="true">↗</span></a>` : ''}
+            <button class="secondary" type="button" data-shortlist-toggle data-shortlist-key="${escapeHtml(shortlistKey)}" data-i18n="${shortlistLabelKey}" aria-pressed="${isShortlisted}">${t(shortlistLabelKey)}</button>
+            <details class="card-tools"><summary data-i18n="moreActions">${t('moreActions')}</summary><div class="card-tools-content">
+              <div class="action-group"><span class="action-group-label" data-i18n="tender">${t('tender')}</span><button class="secondary" data-detail="true" data-i18n="viewDetails">${t('viewDetails')}</button><button class="secondary" data-jev="true" data-i18n="structuredAnalysis">${t('structuredAnalysis')}</button></div>
+              <div class="action-group"><span class="action-group-label" data-i18n="matchFeedback">${t('matchFeedback')}</span><button class="secondary" data-feedback="true" data-relevant="true" data-i18n="relevant">${t('relevant')}</button><button class="secondary" data-feedback="true" data-relevant="false" data-i18n="notRelevant">${t('notRelevant')}</button></div>
+            </div></details>
+          </div>
+          <div class="pursue-row"${savedFeedback ? '' : ' hidden'}>
+            <span class="muted" data-i18n="pursuableQuestion">Pursuable?</span>
+            <button class="secondary" data-pursuable="true" data-i18n="yes">Yes</button>
+            <button class="secondary" data-pursuable="false" data-i18n="no">No</button>
+            <button class="secondary" data-pursuable="" data-i18n="clear">Clear</button>
+            <label class="muted"><span data-i18n="outcome">Outcome</span>
+              <select data-outcome>
+                <option value="">—</option>
+                <option value="bid"${savedFeedback?.outcome === 'bid' ? ' selected' : ''} data-i18n="outcomeBid">bid</option>
+                <option value="no-bid"${savedFeedback?.outcome === 'no-bid' ? ' selected' : ''} data-i18n="outcomeNoBid">no-bid</option>
+                <option value="won"${savedFeedback?.outcome === 'won' ? ' selected' : ''} data-i18n="outcomeWon">won</option>
+                <option value="lost"${savedFeedback?.outcome === 'lost' ? ' selected' : ''} data-i18n="outcomeLost">lost</option>
+              </select>
+            </label>
+            <span class="feedback-state muted">${savedFeedback ? escapeHtml(feedbackStateLabel(savedFeedback.relevant, savedFeedback.pursuable, savedFeedback.outcome)) : ''}</span>
+          </div>
+          <div class="evidence-content"><p class="field-help" data-i18n="sourceEvidenceHelp">Evidence below comes from the retained notice. Verify its scope in the official documents.</p><div class="detail-result muted" aria-live="polite"></div></div>
+          <div class="jev-result muted"></div>
+        </article>`;
+      }).join('')}`;
+      applyUiLanguage(uiLanguage);
+      results.querySelectorAll('[data-review-profile]').forEach(button => {
+        button.addEventListener('click', () => showWorkspaceView('profile'));
+      });
+      results.querySelectorAll('[data-review-evidence]').forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.closest('.card') !== selectedCard) return;
+          setDetailTab('evidence');
+          document.querySelector('#tab-evidence').focus();
+        });
+      });
+      results.querySelectorAll('[data-shortlist-toggle]').forEach(button => {
+        button.addEventListener('click', () => {
+          const key = button.dataset.shortlistKey;
+          const index = shortlist.findIndex(item => shortlistIdentity(item) === key);
+          if (index >= 0) {
+            recordShortlistUndo();
+            shortlist.splice(index, 1);
+          } else {
+            if (shortlist.length >= shortlistLimit) {
+              message.textContent = t('shortlistMax');
+              message.className = 'error';
+              return;
+            }
+            const card = button.closest('.card');
+            const item = items.find(candidate => shortlistIdentity(candidate) === key);
+            if (!item || !card) return;
+            const numberOrNull = value => typeof value === 'number' && Number.isFinite(value) ? value : null;
+            recordShortlistUndo();
+            shortlist.push({
+              saved_at: new Date().toISOString(), notice_revision: savedNoticeRevision(item),
+              source: String(item.source), external_id: String(item.external_id),
+              title: String(item.title || t('tender')), buyer: String(item.buyer || ''),
+              deadline: typeof item.deadline === 'string' ? item.deadline : null,
+              estimated_value: comparableAmount(item.estimated_value) === undefined ? null : item.estimated_value, score: numberOrNull(item.score),
+              confidence: numberOrNull(item.confidence), source_url: typeof item.source_url === 'string' ? item.source_url : null,
+            });
+          }
+          const persisted = persistShortlist();
+          renderShortlist();
+          notifyShortlistChange(persisted);
+          message.textContent = persisted
+            ? t(index >= 0 ? 'removedFromShortlist' : 'addedToShortlist')
+            : t('shortlistNotPersisted');
+          message.className = 'muted';
+        });
+      });
+      results.querySelectorAll('[data-detail]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const card = button.closest('.card');
+          if (!beginCardOperation(card, 'detail')) return;
+          const output = card.querySelector('.detail-result');
+          button.disabled = true; button.textContent = t('cardLoading');
+          if (card === selectedCard) setDetailTab('evidence');
+          try {
+            const response = await apiFetch(`/tenders/${encodeURIComponent(card.dataset.source)}/${encodeURIComponent(card.dataset.id)}`);
+            if (!response.ok) throw new Error('unavailable');
+            const detail = await response.json();
+            if (!finishCardOperation(card, 'detail', 'succeeded')) return;
+            if (card.isConnected) rememberNoticeRevision(detail);
+            output.innerHTML = `<p class="source-line">${escapeHtml(t('sourceRecord'))}: ${escapeHtml(card.dataset.source)} · ${escapeHtml(card.dataset.id)}</p><strong>${escapeHtml(t('description'))}</strong>: ${escapeHtml(detail.description || t('notAvailable'))}<br><strong>${escapeHtml(t('requirements'))}</strong>${renderRequirementEvidence(detail.requirements)}${renderFrameworkMaximumEvidence(detail.raw)}${renderNoticeLotCpvEvidence(detail.raw)}${renderAttachmentEvidence(detail.raw)}`;
+            button.textContent = t('detailsLoaded');
+          } catch (_) {
+            if (!finishCardOperation(card, 'detail', 'failed')) return;
+            output.textContent = t('detailsUnavailable');
+            button.textContent = t('retryDetails'); button.disabled = false;
+          }
+        });
+      });
+      results.querySelectorAll('[data-jev]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const card = button.closest('.card');
+          if (!beginCardOperation(card, 'analysis')) return;
+          button.disabled = true; button.textContent = t('analyzing');
+          const output = card.querySelector('.jev-result');
+          let decision;
+          try {
+            const response = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/tenders/${encodeURIComponent(card.dataset.source)}/${encodeURIComponent(card.dataset.id)}/analysis`);
+            if (!response.ok) throw new Error('unavailable');
+            decision = await response.json();
+          } catch (_) {
+            if (!finishCardOperation(card, 'analysis', 'failed')) return;
+            output.textContent = t('analysisUnavailable'); button.textContent = t('retryAnalysis'); button.disabled = false; return;
+          }
+          if (!finishCardOperation(card, 'analysis', 'succeeded')) return;
+          const score = key => {
+            const answer = decision.raw?.[key];
+            return answer ? `${answer.score} (${Math.round((answer.confidence || 0) * 100)}% ${t('confidence')})` : 'n/a';
+          };
+          output.innerHTML = `<strong>${escapeHtml(t('structuredAnalysis'))}</strong> (${escapeHtml(decision.provider || 'unknown')}, prompt ${escapeHtml(decision.prompt_version || 'unversioned')}): ${escapeHtml(decision.relevance || 'unknown')} · risk: ${escapeHtml(decision.qualification_risk || 'unknown')}<br>${escapeHtml(t('activity'))}: ${escapeHtml(score('activity_match'))} · ${escapeHtml(t('geography'))}: ${escapeHtml(score('geography_match'))} · ${escapeHtml(t('previousWork'))}: ${escapeHtml(score('previous_work_match'))}`;
+          button.textContent = t('analyzed');
+        });
+      });
+      async function saveCardFeedback(card, enterpriseNumber, changedButton, field = 'topic') {
+        const topic = card.dataset.topic;
+        const state = card.querySelector('.feedback-state');
+        if (topic !== 'true' && topic !== 'false') {
+          if (state) state.textContent = t('chooseRelevance');
+          return;
+        }
+        const relevant = topic === 'true';
+        const raw = card.dataset.pursuable;
+        const pursuable = raw === 'true' ? true : raw === 'false' ? false : null;
+        const outcomeSelect = card.querySelector('[data-outcome]');
+        const outcome = outcomeSelect && outcomeSelect.value ? outcomeSelect.value : null;
+        if (!beginCardOperation(card, 'feedback')) return;
+        setFeedbackPending(card, true);
+        if (state) state.textContent = t('savingFeedback');
+        let response, savedFeedback;
+        try {
+          response = await apiFetch(`/companies/${encodeURIComponent(enterpriseNumber)}/feedback`, {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(feedbackPayload(card.dataset.source, card.dataset.id, relevant,
+              field === 'pursuable' ? pursuable : undefined, field === 'outcome' ? outcome : undefined))
+          });
+          if (response.ok) {
+            savedFeedback = (await response.json()).feedback;
+            if (typeof savedFeedback?.relevant !== 'boolean'
+                || !(savedFeedback.pursuable === null || typeof savedFeedback.pursuable === 'boolean')
+                || !(savedFeedback.outcome === null || ['bid','no-bid','won','lost'].includes(savedFeedback.outcome))) {
+              throw new Error('Invalid saved feedback response');
+            }
+          }
+        } catch (_) {
+          if (!finishCardOperation(card, 'feedback', 'failed')) return;
+          setFeedbackPending(card, false);
+          if (state) state.textContent = t('feedbackSaveFailed');
+          if (changedButton) { changedButton.dataset.i18n = 'retryFeedback'; changedButton.textContent = t('retryFeedback'); }
+          return;
+        }
+        if (!response.ok) {
+          if (!finishCardOperation(card, 'feedback', 'failed')) return;
+          setFeedbackPending(card, false);
+          const failureKey = response.status === 401 ? 'feedbackTokenRequired' : 'feedbackSaveFailed';
+          const failure = t(failureKey);
+          if (changedButton) { changedButton.dataset.i18n = failureKey; changedButton.textContent = failure; }
+          else if (state) state.textContent = failure;
+          return;
+        }
+        if (!finishCardOperation(card, 'feedback', 'succeeded')) return;
+        setFeedbackPending(card, false);
+        // Re-judging overwrites server-side, so buttons stay live for corrections.
+        if (changedButton && changedButton.hasAttribute('data-feedback')) {
+          changedButton.dataset.i18n = 'feedbackSaved';
+          changedButton.textContent = t('feedbackSaved');
+          changedButton.disabled = true;
+        }
+        card.dataset.topic = String(savedFeedback.relevant);
+        card.dataset.pursuable = savedFeedback.pursuable === null ? '' : String(savedFeedback.pursuable);
+        if (outcomeSelect) outcomeSelect.value = savedFeedback.outcome || '';
+        if (state) state.textContent = `${t('feedbackSavedAs')} ${feedbackStateLabel(savedFeedback.relevant, savedFeedback.pursuable, savedFeedback.outcome)}`;
+      }
+      results.querySelectorAll('[data-feedback]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const card = button.closest('.card');
+          card.dataset.topic = button.dataset.relevant;
+          const row = card.querySelector('.pursue-row');
+          if (row) row.hidden = false;
+          await saveCardFeedback(card, enterpriseNumber, button);
+        });
+      });
+      results.querySelectorAll('[data-pursuable]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const card = button.closest('.card');
+          card.dataset.pursuable = button.dataset.pursuable;
+          await saveCardFeedback(card, enterpriseNumber, null, 'pursuable');
+        });
+      });
+      results.querySelectorAll('[data-outcome]').forEach(select => {
+        select.addEventListener('change', async () => {
+          const card = select.closest('.card');
+          await saveCardFeedback(card, enterpriseNumber, null, 'outcome');
+        });
+      });
+      mountTenderWorkspace(items);
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showWorkspaceView('opportunities', false);
+      closeFilters();
+      closeTenderSelection(false);
+      resetWorkspaceForSearch();
+      const number = document.querySelector('#enterprise-number').value.trim();
+      activeSort = document.querySelector('#sort-order').value;
+      activeDueWithin = document.querySelector('#deadline-window').value;
+      const sequence = beginDashboardFlow('loading-company');
+      workspaceSearchStarted(sequence);
+      form.setAttribute('aria-busy', 'true');
+      results.setAttribute('aria-busy', 'true');
+      let loadingResource = 'company';
+      message.textContent = t('loadingCompany');
+      message.className = 'muted';
+      company.classList.add('hidden'); preferences.classList.add('hidden'); heading.classList.add('hidden'); resultsSummary.classList.add('hidden'); shortlistPanel.classList.add('hidden'); results.innerHTML = '';
+      try {
+        const encoded = encodeURIComponent(number);
+        const profileResponse = await apiFetch(`/companies/${encoded}`);
+        if (sequence !== searchSequence) return;
+        if (!profileResponse.ok) throw new Error(await apiErrorText(profileResponse, 'company'));
+        const profile = await profileResponse.json();
+        if (sequence !== searchSequence) return;
+        renderCompany(profile);
+        if (!transitionDashboardFlow(sequence, 'loading-preferences')) return;
+        loadingResource = 'profile corrections';
+        const preferencesLoaded = await loadPreferences(profile.enterprise_number, sequence);
+        if (sequence !== searchSequence || !preferencesLoaded) return;
+        if (!transitionDashboardFlow(sequence, 'loading-recommendations')) return;
+        loadingResource = 'recommendations';
+        const due = activeDueWithin ? `&due_within=${activeDueWithin}` : '';
+        const recommendationResponse = await apiFetch(`/companies/${encoded}/recommendations?limit=20&sort=${activeSort}${due}`);
+        if (sequence !== searchSequence) return;
+        if (!recommendationResponse.ok) throw new Error(await apiErrorText(recommendationResponse, 'recommendations'));
+        const items = await recommendationResponse.json();
+        if (sequence !== searchSequence) return;
+        renderResults(items, number);
+        transitionDashboardFlow(sequence, 'ready');
+        form.setAttribute('aria-busy', 'false');
+        results.setAttribute('aria-busy', 'false');
+        message.textContent = '';
+        workspaceSearchReady();
+      } catch (error) {
+        if (sequence !== searchSequence) return;
+        cancelWorkspaceRestore();
+        transitionDashboardFlow(sequence, 'error');
+        form.setAttribute('aria-busy', 'false');
+        results.setAttribute('aria-busy', 'false');
+        const explanation = error instanceof TypeError
+          ? t('networkUnavailable')
+          : error.message || t('serviceUnavailable');
+        const resourceLabel = loadingResource === 'company' ? t('companyResource')
+          : loadingResource === 'profile corrections' ? t('preferencesResource') : t('recommendationsResource');
+        message.textContent = `${t('couldNotLoad')} ${resourceLabel}: ${explanation}`;
+        message.className = 'error';
+      }
+    });
+    window.addEventListener('resize', updateShortlistKeyboardAccess);
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!exampleWorkspace.active) return;
+      document.body.classList.add('is-example');
+      document.querySelector('#example-banner').hidden = false;
+      document.querySelector('#enterprise-number').value = exampleWorkspace.companyNumber;
+      document.querySelector('#enterprise-number').readOnly = true;
+      tokenField.disabled = true;
+      if (dashboardFlow.status === 'idle') form.requestSubmit();
+    });
+  </script>
+</body>
+</html>

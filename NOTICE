@@ -1,0 +1,48 @@
+NOTICE
+
+This repository is MIT licensed (see LICENSE). Two vendored data files are not:
+they are adapted from a CC BY 4.0 work and carry the attribution below.
+
+-------------------------------------------------------------------------------
+CPV and NUTS codelists
+-------------------------------------------------------------------------------
+
+Files:      rust/data/cpv.json
+            rust/data/nuts-bel.json
+
+Licensed material:
+            OP-TED eForms-SDK, release 1.15.1 (published 2026-07-20)
+            https://github.com/OP-TED/eForms-SDK/tree/1.15.1/codelists
+            Source files: codelists/cpv.gc (CPV 2008, 9,454 codes)
+                          codelists/nuts_nuts-bel-lvl3.gc (45 Belgian NUTS
+                          regions at level 3)
+
+Creator:    Publications Office of the European Union, which manages the
+            OP-TED eForms-SDK project.
+
+Copyright:  The upstream project supplies no separate copyright line; the
+            LICENSE file in that repository is the Creative Commons
+            Attribution 4.0 International licence reproduced in full.
+
+Licence:    Creative Commons Attribution 4.0 International (CC BY 4.0)
+            https://creativecommons.org/licenses/by/4.0/
+            The licence text, including its disclaimer of warranties, is at
+            https://github.com/OP-TED/eForms-SDK/blob/main/LICENSE
+
+Modifications:
+            These are adapted extracts, not copies of the source files. For
+            each <Row> of the Genericode files, the columns Name (en),
+            parentCode (CPV only), nld_label and fra_label were selected and
+            re-serialised as a JSON object keyed by code. No code was added,
+            removed or renamed, and no label text was edited. The JSON shape
+            is this repository's; the codes and labels are the upstream
+            project's.
+
+            The extraction was performed once, for release 1.15.1, and is not
+            regenerated automatically. rust/data/codelists-README.md records
+            the source files and the regeneration procedure.
+
+No endorsement:
+            Nothing in this notice, and nothing in this repository, suggests
+            that the Publications Office of the European Union or the eForms
+            SDK project endorses this software or its output.

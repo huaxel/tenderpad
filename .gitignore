@@ -1,0 +1,7 @@
+# Build output. The published tree is built and gated before it is pushed, so
+# these exist locally; they are not part of the publication.
+target/
+rust/target/
+node_modules/
+dist/
+.DS_Store

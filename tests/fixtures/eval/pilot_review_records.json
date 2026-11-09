@@ -1,0 +1,175 @@
+{
+  "$schema": "../../docs/final-work/evaluatiecontract.md",
+  "records": [
+    {
+      "review_id": "11111111-0000-0000-0000-000000000001",
+      "protocol_version": "1.0.0",
+      "evaluation_reference_date": "2026-10-30",
+      "profile_id": "SYN-SME-001",
+      "procedure_key": "bda:2026-000108",
+      "reviewer_id": "DEV-EVALUATOR",
+      "review_timestamp": "2026-10-30T16:00:00Z",
+      "blinded_stage_completed": true,
+      "thematic_relevance": {
+        "label": "ja",
+        "rationale": "IT-ondersteuning en helpdesk vallen exact onder NACE 62.020 en CPV 72253000."
+      },
+      "participation_feasibility": {
+        "label": "concrete_belemmering",
+        "identified_barrier": "turnover_too_high",
+        "notes": "Opdrachtwaarde € 2.500.000 overschrijdt de kmo-omzet (€ 850.000) en max bid capaciteit (€ 350.000) drastisch."
+      },
+      "uncertainty_assessment": {
+        "notice_states_selection_criteria": true,
+        "expected_warning_triggered": true,
+        "unfounded_certainty_detected": false,
+        "notes": "Minimum turnover warning is aanwezig, maar werd door het model niet gebruikt voor de ranking of uitsluiting."
+      },
+      "claim_verifications": [
+        {
+          "claim_text": "Tender activity matches registered company activities",
+          "system_variant": "baseline",
+          "verdict": "ondersteund",
+          "source_passage_quote": "CPV 72253000 Helpdeskdiensten",
+          "source_location": "Aankondigingsbeschrijving"
+        }
+      ]
+    },
+    {
+      "review_id": "11111111-0000-0000-0000-000000000002",
+      "protocol_version": "1.0.0",
+      "evaluation_reference_date": "2026-10-30",
+      "profile_id": "SYN-SME-001",
+      "procedure_key": "ted:2026-S-001-000101",
+      "reviewer_id": "DEV-EVALUATOR",
+      "review_timestamp": "2026-10-30T16:05:00Z",
+      "blinded_stage_completed": true,
+      "thematic_relevance": {
+        "label": "ja",
+        "rationale": "Ontwikkeling en onderhoud van een open data portaal sluit direct aan bij softwareontwikkeling."
+      },
+      "participation_feasibility": {
+        "label": "plausibel",
+        "identified_barrier": null,
+        "notes": "Geraamde waarde € 180.000 past perfect binnen de € 350.000 inschrijvingscapaciteit."
+      },
+      "uncertainty_assessment": {
+        "notice_states_selection_criteria": false,
+        "expected_warning_triggered": true,
+        "unfounded_certainty_detected": false,
+        "notes": "Waarschuwing 'The notice states no selection criteria' correct getoond."
+      },
+      "claim_verifications": [
+        {
+          "claim_text": "Tender activity matches registered company activities",
+          "system_variant": "baseline",
+          "verdict": "ondersteund",
+          "source_passage_quote": "CPV 72200000 Softwareontwikkeling",
+          "source_location": "Sectie II.1.2 TED"
+        }
+      ]
+    },
+    {
+      "review_id": "11111111-0000-0000-0000-000000000003",
+      "protocol_version": "1.0.0",
+      "evaluation_reference_date": "2026-10-30",
+      "profile_id": "SYN-SME-002",
+      "procedure_key": "ted:2026-S-003-000103",
+      "reviewer_id": "DEV-EVALUATOR",
+      "review_timestamp": "2026-10-30T16:10:00Z",
+      "blinded_stage_completed": true,
+      "thematic_relevance": {
+        "label": "ja",
+        "rationale": "Reguliere schoonmaak van gemeentelijke gebouwen sluit direct aan bij NACE 81.210."
+      },
+      "participation_feasibility": {
+        "label": "plausibel",
+        "identified_barrier": null,
+        "notes": "Waarde € 150.000 is ruim haalbaar voor een schoonmaakbedrijf van 22 FTE met € 1,4M omzet."
+      },
+      "uncertainty_assessment": {
+        "notice_states_selection_criteria": false,
+        "expected_warning_triggered": true,
+        "unfounded_certainty_detected": false,
+        "notes": "Selectiecriteria staan niet in de aankondiging; waarschuwing correct weergegeven."
+      },
+      "claim_verifications": [
+        {
+          "claim_text": "Tender activity matches registered company activities",
+          "system_variant": "baseline",
+          "verdict": "ondersteund",
+          "source_passage_quote": "CPV 90910000 Schoonmaakdiensten",
+          "source_location": "Sectie II.1.2 TED"
+        }
+      ]
+    },
+    {
+      "review_id": "11111111-0000-0000-0000-000000000004",
+      "protocol_version": "1.0.0",
+      "evaluation_reference_date": "2026-10-30",
+      "profile_id": "SYN-SME-001",
+      "procedure_key": "ted:2026-S-002-000102",
+      "reviewer_id": "DEV-EVALUATOR",
+      "review_timestamp": "2026-10-30T16:15:00Z",
+      "blinded_stage_completed": true,
+      "thematic_relevance": {
+        "label": "ja",
+        "rationale": "Cloudinfrastructuurmigratie, Kubernetes en CI/CD vallen direct onder NACE 62.010/62.020 en CPV 72000000."
+      },
+      "participation_feasibility": {
+        "label": "plausibel",
+        "identified_barrier": null,
+        "notes": "Raming van € 220.000 valt ruim binnen de maximale kmo-inschrijvingscapaciteit (€ 350.000)."
+      },
+      "uncertainty_assessment": {
+        "notice_states_selection_criteria": false,
+        "expected_warning_triggered": true,
+        "unfounded_certainty_detected": false,
+        "notes": "Selectiecriteria ontbreken in de aankondiging; waarschuwing correct weergegeven."
+      },
+      "claim_verifications": [
+        {
+          "claim_text": "Tender activity matches registered company activities",
+          "system_variant": "baseline",
+          "verdict": "ondersteund",
+          "source_passage_quote": "CPV 72000000 Diensten op het gebied van informatietechnologie",
+          "source_location": "Sectie II.1.2 TED"
+        }
+      ]
+    },
+    {
+      "review_id": "11111111-0000-0000-0000-000000000005",
+      "protocol_version": "1.0.0",
+      "evaluation_reference_date": "2026-10-30",
+      "profile_id": "SYN-SME-001",
+      "procedure_key": "ted:2026-S-006-000106",
+      "reviewer_id": "DEV-EVALUATOR",
+      "review_timestamp": "2026-10-30T16:20:00Z",
+      "blinded_stage_completed": true,
+      "thematic_relevance": {
+        "label": "nee",
+        "rationale": "Fysieke bekabeling en telecom-infrastructuur (CPV 32562000) betreffen civiele installatiewerken, geen software of cloudarchitectuur."
+      },
+      "participation_feasibility": {
+        "label": "concrete_belemmering",
+        "identified_barrier": "other_exclusion",
+        "notes": "Specifieke bekabelings- en netwerkmaterieeleisen."
+      },
+      "uncertainty_assessment": {
+        "notice_states_selection_criteria": false,
+        "expected_warning_triggered": true,
+        "unfounded_certainty_detected": false,
+        "notes": "Geen selectiecriteria vermeld."
+      },
+      "claim_verifications": [
+        {
+          "claim_text": "Tender activity matches registered company activities",
+          "system_variant": "baseline",
+          "verdict": "ondersteund",
+          "source_passage_quote": "CPV 32562000 Glasvezelkabels",
+          "source_location": "Sectie II.1.2 TED"
+        }
+      ]
+    }
+  ]
+}

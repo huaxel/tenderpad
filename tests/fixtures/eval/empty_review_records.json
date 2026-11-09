@@ -1,0 +1,39 @@
+{
+  "$schema": "../../docs/final-work/evaluatiecontract.md",
+  "records": [
+    {
+      "review_id": "00000000-0000-0000-0000-000000000001",
+      "protocol_version": "1.0.0",
+      "evaluation_reference_date": "2026-10-30",
+      "profile_id": "SYN-SME-001",
+      "procedure_key": "ted:2026-S-001-000101",
+      "reviewer_id": "REVIEWER-A",
+      "review_timestamp": "2026-10-30T14:00:00Z",
+      "blinded_stage_completed": true,
+      "thematic_relevance": {
+        "label": "ja",
+        "rationale": "Webapplicatie en open data sluiten direct aan bij softwareontwikkeling van SYN-SME-001."
+      },
+      "participation_feasibility": {
+        "label": "plausibel",
+        "identified_barrier": null,
+        "notes": "Geen disproportionele omzet- of teamvereisten in de aankondiging."
+      },
+      "uncertainty_assessment": {
+        "notice_states_selection_criteria": true,
+        "expected_warning_triggered": false,
+        "unfounded_certainty_detected": false,
+        "notes": "Selectiecriteria gespecificeerd in aankondiging."
+      },
+      "claim_verifications": [
+        {
+          "claim_text": "Activity matches IT and software development",
+          "system_variant": "baseline",
+          "verdict": "ondersteund",
+          "source_passage_quote": "CPV 72200000 Softwareontwikkeling",
+          "source_location": "Sectie II.1.2 van TED-aankondiging"
+        }
+      ]
+    }
+  ]
+}

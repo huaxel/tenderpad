@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+               xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+               xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cbc:ID>FIXTURE-0001</cbc:ID>
+  <cbc:ContractFolderID>fixture-folder-0001</cbc:ContractFolderID>
+  <cbc:IssueDate>2026-01-05</cbc:IssueDate>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cac:ContractingParty><cac:Party><cac:PartyName><cbc:Name>Stad Voorbeeldstad</cbc:Name></cac:PartyName></cac:Party></cac:ContractingParty>
+  <cac:ProcurementProject>
+    <cbc:Name>Levering van farmaceutische producten</cbc:Name>
+    <cbc:Description>Raamovereenkomst voor de levering van farmaceutische producten aan de apotheek.</cbc:Description>
+    <cbc:ProcurementTypeCode>goods</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode>33600000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:RealizedLocation>
+      <cbc:CountrySubentityCode>BE224</cbc:CountrySubentityCode>
+    </cac:RealizedLocation>
+    <cac:PlannedPeriod>
+      <cbc:EndDate>2027-06-30</cbc:EndDate>
+    </cac:PlannedPeriod>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID>LOT-0001</cbc:ID>
+    <cac:ProcurementProject>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode>33600000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+  <cac:TenderingProcess>
+    <cac:TenderSubmissionDeadlinePeriod>
+      <cbc:EndDate>2027-06-30</cbc:EndDate>
+    </cac:TenderSubmissionDeadlinePeriod>
+  </cac:TenderingProcess>
+  <cac:TenderingTerms>
+    <cac:Language>
+      <cbc:ID>NLD</cbc:ID>
+    </cac:Language>
+  </cac:TenderingTerms>
+</ContractNotice>

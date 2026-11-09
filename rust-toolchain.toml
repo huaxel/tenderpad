@@ -1,0 +1,7 @@
+[toolchain]
+# Pinned because rust/Cargo.lock requires rustc 1.88+ (e.g. icu_properties_data 2.3.0,
+# time 0.3.47). Keep in sync with the `toolchain:` inputs in .github/workflows/ci.yml.
+# Note: a RUSTUP_TOOLCHAIN environment variable overrides this file; unset it
+# (e.g. `env -u RUSTUP_TOOLCHAIN`) if cargo reports an older toolchain.
+channel = "1.88.0"
+components = ["rustfmt", "clippy"]

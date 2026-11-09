@@ -1,0 +1,33 @@
+{
+  "$schema": "../../docs/final-work/evaluatiecontract.md",
+  "profile_id": "SYN-SME-002",
+  "name": "Synthetisch Faciliteit & Onderhoud BV",
+  "sector_description": "Gebouwreiniging, sanitair onderhoud en periodiek facilitair beheer voor publieke instellingen",
+  "nace_codes": [
+    "81.210",
+    "81.220"
+  ],
+  "primary_cpv_prefixes": [
+    "90910000",
+    "90911200",
+    "90919200"
+  ],
+  "regions": [
+    "BE10",
+    "BE3"
+  ],
+  "languages": [
+    "fr",
+    "nl"
+  ],
+  "capacity": {
+    "fte_count": 22,
+    "annual_turnover_eur": 1400000.0,
+    "max_bid_capacity_eur": 600000.0
+  },
+  "explicitly_unknown_qualifications": [
+    "Geen VCA** certificering geregistreerd",
+    "Geen erkenning als aannemer van werken (Klasse 2 Categorie D)",
+    "Geen eerdere defensie- of nucleaire facilitaire referenties"
+  ]
+}

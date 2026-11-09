@@ -1,0 +1,118 @@
+[package]
+name = "aanbestedingen-matcher"
+version = "0.1.0"
+edition = "2021"
+description = "Transparent Belgian public procurement matching engine"
+license = "MIT"
+default-run = "aanbestedingen-matcher"
+
+[features]
+# The network feature carries the data-acquisition surface: the audited HTTP
+# clients (http_retry, service_calls), the NBB, KBO, TED and BOSA fetchers, and
+# the bundle assembly that calls them. It is on by default for the product.
+# Turning it off yields a crate that parses, matches, stores and ranks local
+# data, which is what the public showcase publishes. The LLM analysis path is
+# deliberately outside this feature: it is a documented API capability and is
+# inert without a configured key.
+default = []
+network = []
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+ureq = { version = "=2.12.1", default-features = false, features = ["json", "tls"] }
+url = "=2.5.8"
+# Arrow 60.1 resolves RUSTSEC-2026-0442 in the transitive arrow-data dependency.
+duckdb = { version = "=1.20000.1", features = ["bundled", "rust_decimal"] }
+axum = "0.7"
+# RUSTSEC-2026-0386: 1.53.3 is the patched release on the current minor line.
+tokio = { version = "1.53.3", features = ["macros", "net", "rt-multi-thread"] }
+chrono = { version = "0.4", features = ["clock"] }
+tower-http = { version = "0.5", features = ["fs"] }
+regex = "1"
+quick-xml = "=0.41.0"
+zip = { version = "=9.0.4", default-features = false, features = ["deflate"] }
+time = "=0.3.47"
+pdf-extract = "=0.12.1"
+encoding_rs = "=0.8.34"
+rust_decimal = { version = "=1.43.0", features = ["serde"] }
+sha2 = "0.10"
+sha1 = "0.10"
+base64 = "0.22"
+uuid = { version = "=1.18.1", features = ["v4", "serde"] }
+calamine = "0.38.0"
+# Already present in the lockfile and runner controller; flock/O_NOFOLLOW for call auditing.
+libc = "=0.2.189"
+
+[dev-dependencies]
+
+# CI already builds with CARGO_PROFILE_DEV_DEBUG=0; do the same locally so the
+# build tree stays small. Debuginfo dominated it (tens of GB). Set
+# CARGO_PROFILE_DEV_DEBUG=2 for a session that needs a debugger's symbols.
+[profile.dev]
+debug = 0
+
+[[bin]]
+name = "bosa-dossier"
+path = "src/bin/bosa-dossier.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "bosa-evidence"
+path = "src/bin/bosa-evidence.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "bosa-ingest"
+path = "src/bin/bosa-ingest.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "nbb-bundle"
+path = "src/bin/nbb-bundle.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "ted-ingest"
+path = "src/bin/ted-ingest.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "ted-search"
+path = "src/bin/ted-search.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "award-ingest"
+path = "src/bin/award-ingest.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "kbo-lookup"
+path = "src/bin/kbo-lookup.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "recognized-contractors-snapshot"
+path = "src/bin/recognized-contractors-snapshot.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "service-usage"
+path = "src/bin/service-usage.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "bosa-documents"
+path = "src/bin/bosa-documents.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "bosa-search"
+path = "src/bin/bosa-search.rs"
+required-features = ["network"]
+
+[[bin]]
+name = "nbb-fetch"
+path = "src/bin/nbb-fetch.rs"
+required-features = ["network"]

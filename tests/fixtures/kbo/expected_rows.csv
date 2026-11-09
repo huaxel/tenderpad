@@ -1,0 +1,10 @@
+# Row counts of the export these CSVs came from. The first successful
+# import records them, and later imports must match: a download cut at a
+# line boundary has no malformed row to reject. Check the numbers against
+# the snapshot documented in FIXTURES.md.
+kbo_activity,2
+kbo_address,1
+kbo_code,6
+kbo_denomination,2
+kbo_enterprise,1
+kbo_establishment,1

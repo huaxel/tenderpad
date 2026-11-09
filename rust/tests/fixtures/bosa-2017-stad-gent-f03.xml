@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Real published TED award notice (Stad Gent, 2017). Modification: the winning contractor name was replaced with a placeholder, because this file is published in the public showcase. Nothing else is changed. --><TED_ESENDERS xmlns="ted/R2.0.9.S02/reception" xmlns:n2016="ted/2016/nuts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" VERSION="R2.0.9.S02" xsi:schemaLocation="ted/R2.0.9.S02/reception TED_ESENDERS.xsd">
+<SENDER><IDENTIFICATION><ESENDER_LOGIN>BE001</ESENDER_LOGIN><NO_DOC_EXT>2017-523365</NO_DOC_EXT></IDENTIFICATION><CONTACT><ORGANISATION>Helpdesk e-Procurement</ORGANISATION><COUNTRY VALUE="BE"/></CONTACT><NOTIFICATION><TECHNICAL CONTRACTING_BODY="YES" ESENDER="YES"/><PUBLICATION ESENDER="YES"/></NOTIFICATION></SENDER>
+<FORM_SECTION>
+<F03_2014 CATEGORY="ORIGINAL" FORM="F03" LG="NL">
+<CONTRACTING_BODY>
+<ADDRESS_CONTRACTING_BODY>
+<OFFICIALNAME>Stad Gent</OFFICIALNAME>
+<NATIONALID>207.451.227</NATIONALID>
+<ADDRESS>Botermarkt 1</ADDRESS>
+<TOWN>Gent</TOWN>
+<POSTAL_CODE>9000</POSTAL_CODE>
+<COUNTRY VALUE="BE"/>
+
+<n2016:NUTS CODE="BE234"/>
+<URL_GENERAL>www.gent.be</URL_GENERAL>
+</ADDRESS_CONTRACTING_BODY>
+<CA_TYPE VALUE="REGIONAL_AUTHORITY"/>
+<CA_ACTIVITY VALUE="GENERAL_PUBLIC_SERVICES"/>
+</CONTRACTING_BODY>
+<OBJECT_CONTRACT>
+<TITLE><P>Raamovereenkomst voor het leveren van LED verlichtingsarmaturen en onderdelen voor musea</P></TITLE>
+<REFERENCE_NUMBER>ECO/2017/019 - ID4165</REFERENCE_NUMBER>
+<CPV_MAIN>
+<CPV_CODE CODE="31000000"/>
+</CPV_MAIN>
+<TYPE_CONTRACT CTYPE="SUPPLIES"/>
+<SHORT_DESCR><P>zie II.1.1</P></SHORT_DESCR>
+<VAL_TOTAL CURRENCY="EUR">541442.51</VAL_TOTAL>
+<NO_LOT_DIVISION/>
+<OBJECT_DESCR ITEM="1">
+<n2016:NUTS CODE="BE234"/>
+<MAIN_SITE><P>Grondgebied Gent</P></MAIN_SITE>
+<SHORT_DESCR><P>zie II.1.4</P></SHORT_DESCR>
+<AC_QUALITY>
+<AC_CRITERION>Niet gespecifieerd</AC_CRITERION>
+<AC_WEIGHTING>Niet gespecifieerd</AC_WEIGHTING>
+</AC_QUALITY>
+<AC_PRICE>
+<AC_WEIGHTING>Niet gespecifieerd</AC_WEIGHTING>
+</AC_PRICE>
+<OPTIONS/>
+<OPTIONS_DESCR><P>Zie oorspronkelijke publicatie</P></OPTIONS_DESCR>
+<NO_EU_PROGR_RELATED/>
+</OBJECT_DESCR>
+</OBJECT_CONTRACT>
+<PROCEDURE>
+<PT_OPEN/>
+<FRAMEWORK/>
+<CONTRACT_COVERED_GPA/>
+<NOTICE_NUMBER_OJ>2017/S 065-123105</NOTICE_NUMBER_OJ>
+</PROCEDURE>
+<AWARD_CONTRACT ITEM="1">
+<CONTRACT_NO>ECO/2017/019 - ID4165</CONTRACT_NO>
+<TITLE><P>Basisopdracht</P></TITLE>
+<AWARDED_CONTRACT>
+<DATE_CONCLUSION_CONTRACT>2017-06-28</DATE_CONCLUSION_CONTRACT>
+<NB_TENDERS_RECEIVED>1</NB_TENDERS_RECEIVED>
+<NB_TENDERS_RECEIVED_OTHER_EU>0</NB_TENDERS_RECEIVED_OTHER_EU>
+<NB_TENDERS_RECEIVED_NON_EU>0</NB_TENDERS_RECEIVED_NON_EU>
+<NB_TENDERS_RECEIVED_EMEANS>1</NB_TENDERS_RECEIVED_EMEANS>
+<NO_AWARDED_TO_GROUP/>
+<CONTRACTOR>
+<ADDRESS_CONTRACTOR>
+<OFFICIALNAME>nv Voorbeeld Leverancier</OFFICIALNAME>
+<ADDRESS>Eugène Bekaertlaan 63</ADDRESS>
+<TOWN>Waregem</TOWN>
+<POSTAL_CODE>8790</POSTAL_CODE>
+<COUNTRY VALUE="BE"/>
+
+<n2016:NUTS CODE="BE"/>
+</ADDRESS_CONTRACTOR>
+<NO_SME/>
+</CONTRACTOR>
+<VAL_TOTAL CURRENCY="EUR">541442.51</VAL_TOTAL>
+</AWARDED_CONTRACT>
+</AWARD_CONTRACT>
+<COMPLEMENTARY_INFO>
+<INFO_ADD><P>De opdracht omvat gedeeltelijke bestellingen. De gedeeltelijke bestellingen zullen door de diverse diensten aan de leverancier via een bestelnota per mail of fax aan de leverancier overgemaakt worden. Bij levering bezorgt de firma een leveringsnota met daarop o.a. de vermelding van de afgenomen goederen, hoeveelheid alsook de nettoprijs van elk artikel.</P><P>Slechts na ontvangst van een bestelbon of bestelbonnen ontstaat voor de opdrachtnemer het recht tot leveren. In het kader van deze overeenkomst wordt elke bestelling als een afzonderlijke opdracht beschouwd, onafhankelijk van de uitvoering van de overige opdrachten.</P><P>De leveringstermijn van de individuele afroepen bedraagt maximaal 56 kalenderdagen. (8 weken)</P><P>Opgelet!</P><P>Indien u geïnteresseerd bent in deze opdracht kunt u deze verder opvolgen door u als onderneming te registreren op de website van e-Notification.</P><P>Deze aankondiging kunt u dan aanduiden als favoriet door bovenaan op de hiervoor aangemaakte knop te drukken ‘toevoegen aan favorieten’ en de functie ‘messaging’ te activeren.</P><P>U wordt dan op de hoogte gehouden van eventuele wijzigingsberichten.</P></INFO_ADD>
+<ADDRESS_REVIEW_BODY>
+<OFFICIALNAME>Raad Van State</OFFICIALNAME>
+<ADDRESS>Wetenschapsstraat 33</ADDRESS>
+<TOWN>Brussel (Etterbeek)</TOWN>
+<POSTAL_CODE>1040</POSTAL_CODE>
+<COUNTRY VALUE="BE"/>
+</ADDRESS_REVIEW_BODY>
+<DATE_DISPATCH_NOTICE>2017-07-04</DATE_DISPATCH_NOTICE>
+</COMPLEMENTARY_INFO>
+</F03_2014>
+</FORM_SECTION>
+</TED_ESENDERS>

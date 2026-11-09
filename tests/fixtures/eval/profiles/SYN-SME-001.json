@@ -1,0 +1,33 @@
+{
+  "$schema": "../../docs/final-work/evaluatiecontract.md",
+  "profile_id": "SYN-SME-001",
+  "name": "Synthetisch IT & Cloud Bedrijf BV",
+  "sector_description": "Softwareontwikkeling, webapplicaties en cloudarchitectuur voor overheidsdiensten",
+  "nace_codes": [
+    "62.010",
+    "62.020"
+  ],
+  "primary_cpv_prefixes": [
+    "72000000",
+    "72200000",
+    "72400000"
+  ],
+  "regions": [
+    "BE10",
+    "BE2"
+  ],
+  "languages": [
+    "nl",
+    "en"
+  ],
+  "capacity": {
+    "fte_count": 8,
+    "annual_turnover_eur": 850000.0,
+    "max_bid_capacity_eur": 350000.0
+  },
+  "explicitly_unknown_qualifications": [
+    "Geen ISO 27001 certificering geregistreerd",
+    "Geen NAVO / federale veiligheidsmachtiging aanwezig",
+    "Geen eerdere publieke referenties boven € 500.000"
+  ]
+}

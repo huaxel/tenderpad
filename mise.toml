@@ -1,0 +1,6 @@
+# The global mise config pins Rust 1.85 and exports
+# RUSTUP_TOOLCHAIN=1.85.1, which shadows rust-toolchain.toml (the build needs
+# 1.88 for Cargo.lock). Point the override at the rustup-managed 1.88
+# toolchain instead of installing a second copy via mise.
+[env]
+RUSTUP_TOOLCHAIN = "1.88.0"

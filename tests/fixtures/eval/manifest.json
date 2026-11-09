@@ -1,0 +1,236 @@
+{
+  "$schema": "../../docs/final-work/evaluatiecontract.md",
+  "manifest_version": "1.0.0",
+  "evaluation_reference_date": "2026-10-30",
+  "dataset_name": "Pilot Triage Evaluatiecollectie 2026-10 (synthetisch)",
+  "procedures": [
+    {
+      "procedure_key": "ted:2026-S-001-000101",
+      "source": "ted",
+      "external_id": "2026-S-001-000101",
+      "dossier_id": "DOS-2026-IT-001",
+      "title": "Ontwikkeling en onderhoud van een portaal voor open data en burgerparticipatie",
+      "description": "Webportaal voor open data en burgerparticipatie",
+      "cpv_codes": [
+        "72200000",
+        "72262000"
+      ],
+      "regions": [
+        "BE2"
+      ],
+      "estimated_value": 180000.0,
+      "languages": [
+        "nl"
+      ],
+      "publication_date": "2026-10-01",
+      "deadline": "2026-11-20",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stratum": "clear_match"
+    },
+    {
+      "procedure_key": "ted:2026-S-002-000102",
+      "source": "ted",
+      "external_id": "2026-S-002-000102",
+      "dossier_id": "DOS-2026-IT-002",
+      "title": "Migratie en modernisering van cloudinfrastructuur (Kubernetes & CI/CD)",
+      "description": "Kubernetes en cloud transitie",
+      "cpv_codes": [
+        "72000000",
+        "72315000"
+      ],
+      "regions": [
+        "BE2"
+      ],
+      "estimated_value": 220000.0,
+      "languages": [
+        "nl"
+      ],
+      "publication_date": "2026-10-05",
+      "deadline": "2026-11-25",
+      "source_sha256": "a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef0",
+      "stratum": "clear_match"
+    },
+    {
+      "procedure_key": "ted:2026-S-003-000103",
+      "source": "ted",
+      "external_id": "2026-S-003-000103",
+      "dossier_id": "DOS-2026-FAC-001",
+      "title": "Schoonmaak en periodiek onderhoud van gemeentelijke administratieve gebouwen",
+      "description": "Schoonmaak en periodiek onderhoud",
+      "cpv_codes": [
+        "90910000"
+      ],
+      "regions": [
+        "BE10"
+      ],
+      "estimated_value": 140000.0,
+      "languages": [
+        "nl",
+        "fr"
+      ],
+      "publication_date": "2026-10-02",
+      "deadline": "2026-11-15",
+      "source_sha256": "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "stratum": "clear_match"
+    },
+    {
+      "procedure_key": "ted:2026-S-004-000104",
+      "source": "ted",
+      "external_id": "2026-S-004-000104",
+      "dossier_id": "DOS-2026-MED-001",
+      "title": "Levering van gespecialiseerde medische diagnostische apparatuur en verbruiksgoederen",
+      "description": "Medische diagnostische apparatuur",
+      "cpv_codes": [
+        "33100000"
+      ],
+      "regions": [
+        "BE2"
+      ],
+      "estimated_value": 500000.0,
+      "languages": [
+        "nl"
+      ],
+      "publication_date": "2026-10-03",
+      "deadline": "2026-11-18",
+      "source_sha256": "fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+      "stratum": "clear_mismatch"
+    },
+    {
+      "procedure_key": "ted:2026-S-005-000105",
+      "source": "ted",
+      "external_id": "2026-S-005-000105",
+      "dossier_id": "DOS-2026-ROAD-001",
+      "title": "Asfalterings- en herstellingswerken aan gewestwegen in provincie Henegouwen",
+      "description": "Wegenwerken en asfaltering",
+      "cpv_codes": [
+        "45233220"
+      ],
+      "regions": [
+        "BE3"
+      ],
+      "estimated_value": 750000.0,
+      "languages": [
+        "fr"
+      ],
+      "publication_date": "2026-10-04",
+      "deadline": "2026-11-22",
+      "source_sha256": "456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123",
+      "stratum": "clear_mismatch"
+    },
+    {
+      "procedure_key": "ted:2026-S-006-000106",
+      "source": "ted",
+      "external_id": "2026-S-006-000106",
+      "dossier_id": "DOS-2026-IT-003",
+      "title": "Aanleg en fysieke bekabeling van glasvezelinfrastructuur in datacenter",
+      "description": "Aanleg en bekabeling van glasvezel",
+      "cpv_codes": [
+        "32562000"
+      ],
+      "regions": [
+        "BE10"
+      ],
+      "estimated_value": 110000.0,
+      "languages": [
+        "nl"
+      ],
+      "publication_date": "2026-10-06",
+      "deadline": "2026-11-30",
+      "source_sha256": "789abcdef0123456789abcdef0123456789abcdef0123456789abcdef01234567",
+      "stratum": "borderline_or_missing_info"
+    },
+    {
+      "procedure_key": "ted:2026-S-007-000107",
+      "source": "ted",
+      "external_id": "2026-S-007-000107",
+      "dossier_id": "DOS-2026-FAC-002",
+      "title": "Reiniging en industriële sanering na brandschade (zonder gespecificeerde selectiecriteria)",
+      "description": "Reiniging en industriële sanering",
+      "cpv_codes": [
+        "90910000"
+      ],
+      "regions": [
+        "BE2"
+      ],
+      "estimated_value": 160000.0,
+      "languages": [
+        "nl"
+      ],
+      "publication_date": "2026-10-07",
+      "deadline": "2026-12-05",
+      "source_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "stratum": "borderline_or_missing_info"
+    },
+    {
+      "procedure_key": "bda:2026-000108",
+      "source": "bda",
+      "external_id": "2026-000108",
+      "dossier_id": "DOS-2026-IT-004",
+      "title": "Raamovereenkomst IT-ondersteuning en helpdesk ter plaatse (omzetvereiste € 2.500.000)",
+      "description": "Helpdesk support met omzetvereiste",
+      "cpv_codes": [
+        "72253000"
+      ],
+      "regions": [
+        "BE10"
+      ],
+      "estimated_value": 2500000.0,
+      "languages": [
+        "nl",
+        "fr"
+      ],
+      "requirements": [
+        "Omzetvereiste van minimaal 2.500.000 EUR op jaarbasis"
+      ],
+      "publication_date": "2026-10-08",
+      "deadline": "2026-11-28",
+      "source_sha256": "bcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789a",
+      "stratum": "borderline_or_missing_info"
+    },
+    {
+      "procedure_key": "bda:2026-000109",
+      "source": "bda",
+      "external_id": "2026-000109",
+      "dossier_id": "DOS-2026-FOOD-001",
+      "title": "Catering en levering van schoolmaaltijden aan stedelijke basisscholen",
+      "description": "Catering schoolmaaltijden",
+      "cpv_codes": [
+        "55524000"
+      ],
+      "regions": [
+        "BE2"
+      ],
+      "estimated_value": 300000.0,
+      "languages": [
+        "nl"
+      ],
+      "publication_date": "2026-10-09",
+      "deadline": "2026-11-19",
+      "source_sha256": "cdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789ab",
+      "stratum": "clear_mismatch"
+    },
+    {
+      "procedure_key": "ted:2026-S-010-000110",
+      "source": "ted",
+      "external_id": "2026-S-010-000110",
+      "dossier_id": "DOS-2026-FAC-003",
+      "title": "Periodieke ruitenwasserij en gevelreiniging op hoogte met hoogwerkers",
+      "description": "Ruitenwasserij op hoogte",
+      "cpv_codes": [
+        "90911300"
+      ],
+      "regions": [
+        "BE10"
+      ],
+      "estimated_value": 90000.0,
+      "languages": [
+        "nl",
+        "fr"
+      ],
+      "publication_date": "2026-10-10",
+      "deadline": "2026-12-01",
+      "source_sha256": "def0123456789abcdef0123456789abcdef0123456789abcdef0123456789abc",
+      "stratum": "borderline_or_missing_info"
+    }
+  ]
+}
